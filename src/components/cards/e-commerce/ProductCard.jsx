@@ -29,7 +29,7 @@ import { Heart } from 'iconsax-react';
 
 // ==============================|| PRODUCT CARD ||============================== //
 
-export default function ProductCard({ id, color, name, brand, offer, isStock, image, description, offerPrice, salePrice, rating }) {
+export default function ProductCard({ id, title, brand, image, description }) {
   const theme = useTheme();
 
   const [wishlisted, setWishlisted] = useState(false);
@@ -69,7 +69,7 @@ export default function ProductCard({ id, color, name, brand, offer, isStock, im
           sx={{ height: 250, textDecoration: 'none'}}
           image={image && getImageUrl(`${image}`, ImagePath.ECOMMERCE)}
           component={Link}
-          to={`/apps/tools/${id}`}
+          to={`/apps/tools/tool/${id}`}
         />
       </Box>
       <Stack
@@ -93,12 +93,12 @@ export default function ProductCard({ id, color, name, brand, offer, isStock, im
             <Stack>
               <Typography
                 component={Link}
-                to={`/apps/tools/${id}`}
+                to={`/apps/tools/tool/${id}`}
                 color="text.primary"
                 variant="h5"
                 sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block', textDecoration: 'none' }}
               >
-                {name}
+                {title}
               </Typography>
               <Typography variant="h6" color="text.secondary">
                 {brand}
@@ -112,7 +112,7 @@ export default function ProductCard({ id, color, name, brand, offer, isStock, im
                   <Typography variant="h5">{description}</Typography>
                 </Stack>
               </Stack>
-              <Button variant="contained" href={`/apps/tools/${id}`}>
+              <Button variant="contained" href={`/apps/tools/tool/${id}`}>
                 See tool
               </Button>
             </Stack>
@@ -125,7 +125,7 @@ export default function ProductCard({ id, color, name, brand, offer, isStock, im
 
 ProductCard.propTypes = {
   id: PropTypes.any,
-  name: PropTypes.any,
+  title: PropTypes.any,
   brand: PropTypes.any,
   image: PropTypes.any,
   description: PropTypes.any,

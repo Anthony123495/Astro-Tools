@@ -11,172 +11,93 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
 
 // project-imports
 import MainCard from 'components/MainCard';
-import FloatingCart from 'components/cards/e-commerce/FloatingCart';
 
 import ProductFeatures from 'sections/apps/e-commerce/product-details/ProductFeatures';
-import ProductImages from 'sections/apps/e-commerce/product-details/ProductImages';
 import ProductInfo from 'sections/apps/e-commerce/product-details/ProductInfo';
-import ProductReview from 'sections/apps/e-commerce/product-details/ProductReview';
-import ProductSpecifications from 'sections/apps/e-commerce/product-details/ProductSpecifications';
-import RelatedProducts from 'sections/apps/e-commerce/product-details/RelatedProducts';
+import ToolsList from 'sections/apps/e-commerce/products/ToolsList';
+import { useTheme } from '@mui/material/styles';
+import { Book } from 'iconsax-react';
 
-import { resetCart, useGetCart } from 'api/cart';
-
-function TabPanel({ children, value, index, ...other }) {
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`product-details-tabpanel-${index}`}
-      aria-labelledby={`product-details-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box>{children}</Box>}
-    </div>
-  );
-}
-
-function a11yProps(index) {
-  return {
-    id: `product-details-tab-${index}`,
-    'aria-controls': `product-details-tabpanel-${index}`
-  };
-}
-
-// ==============================|| ECOMMERCE - PRODUCT DETAILS ||============================== //
+// ==============================|| TOOLS - TOOL DETAILS ||============================== //
 
 export default function ProductDetails() {
   const { id } = useParams();
+  const theme = useTheme();
 
-  const product = useLoaderData();
-  const { cart } = useGetCart();
-
-  // product description tabs
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
+  const [isLoading, setLoading] = useState(true);
   useEffect(() => {
-    // clear cart if complete order
-    if (cart && cart.step > 2) {
-      resetCart();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+    setLoading(false);
+  }, []);
 
-  const productImages = useMemo(() => <ProductImages product={product} />, [product]);
-  const relatedProducts = useMemo(() => <RelatedProducts id={id} />, [id]);
-
+  const filtered = ToolsList.filter(tool => tool.id.includes(id))
+  const rightTool = filtered[0]
+  
   return (
     <>
-      {product && product.id === Number(id) && (
         <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={8} md={5} lg={4}>
-                {productImages}
-              </Grid>
-
-              <Grid item xs={12} md={7} lg={8}>
-                <MainCard border={false} sx={{ height: '100%', bgcolor: 'secondary.lighter' }}>
-                  <ProductInfo product={product} />
+          <Stack item xs={12}>
+            <Stack container spacing={2}>
+              <Stack item xs={12} md={7} lg={8}>
+                <MainCard border={true} sx={{ height: '100%', bgcolor: 'primary.lighter' }}>
+                  <ProductInfo tool={rightTool} />
                 </MainCard>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} md={7} xl={8}>
+              </Stack>
+            </Stack>
+            <br />
             <MainCard>
               <Stack spacing={3}>
-                <Stack>
-                  <Tabs
-                    value={value}
-                    indicatorColor="primary"
-                    onChange={handleChange}
-                    aria-label="product description tabs example"
-                    variant="scrollable"
+                <Stack spacing={4}>
+                  <Box
+                      sx={{
+                        '& .MuiAccordion-root': {
+                          borderColor: theme.palette.divider,
+        
+                          '& .MuiAccordionSummary-root': {
+                            bgcolor: 'transparent',
+                            flexDirection: 'row'
+                          },
+                          '& .MuiAccordionDetails-root': {
+                            borderColor: theme.palette.divider
+                          },
+                          '& .Mui-expanded': {
+                            color: 'primary.main'
+                          }
+                        }
+                      }}
                   >
-                    <Tab component={Link} to="#" label="Features" {...a11yProps(0)} />
-                    <Tab component={Link} to="#" label="Specifications" {...a11yProps(1)} />
-                    <Tab component={Link} to="#" label="Overview" {...a11yProps(2)} />
-                    <Tab
-                      component={Link}
-                      to="#"
-                      label={
-                        <Stack direction="row" alignItems="center">
-                          Reviews{' '}
-                          <Chip
-                            label={String(product.offerPrice?.toFixed(0))}
-                            size="small"
-                            sx={{
-                              ml: 0.5,
-                              color: value === 3 ? 'primary.main' : 'common.white',
-                              bgcolor: value === 3 ? 'primary.lighter' : 'secondary.400',
-                              borderRadius: '10px'
-                            }}
-                          />
+                    <Accordion>
+                      <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+                        <Stack direction="row" spacing={1.5} alignItems="center">
+                          <Book />
+                          <Typography variant="h6">How to Get Started</Typography>
                         </Stack>
-                      }
-                      {...a11yProps(3)}
-                    />
-                  </Tabs>
-                  <Divider />
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Stack spacing={2}>
+                          <Typography>
+                            The David Astro Tools Astrophotography Framing Assistant is a powerful tool designed to help you precisely frame your celestial targets.
+                          </Typography>
+                          <Typography>
+                            By selecting your equipment from our extensive database (camera, telescope, focal reducer) or manually entering key details (focal length, pixel size, sensor size), you can visualize your composition in real-time with the help of the dynamic Aladin API navigator.
+                          </Typography>
+                          <Typography>
+                            Additionally, the tool provides a comprehensive table of calculated values, including
+                          </Typography>
+                        </Stack>
+                      </AccordionDetails>
+                    </Accordion>
+                  </Box>
                 </Stack>
-                <TabPanel value={value} index={0}>
-                  <ProductFeatures />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                  <ProductSpecifications />
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                  <Stack spacing={2.5}>
-                    <Typography color="text.secondary">
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard
-                      dummy text ever since the 1500s,{' '}
-                      <Typography component="span" variant="subtitle1">
-                        {' '}
-                        &ldquo;When an unknown printer took a galley of type and scrambled it to make a type specimen book.&rdquo;
-                      </Typography>{' '}
-                      It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-                      unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and
-                      more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    </Typography>
-                    <Typography color="text.secondary">
-                      It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-                      with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    </Typography>
-                  </Stack>
-                </TabPanel>
-                <TabPanel value={value} index={3}>
-                  <ProductReview product={product} />
-                </TabPanel>
               </Stack>
             </MainCard>
-          </Grid>
-          <Grid item xs={12} md={5} xl={4} sx={{ position: 'relative' }}>
-            <MainCard
-              title="Related Products"
-              sx={{
-                height: 'calc(100% - 16px)',
-                position: { xs: 'relative', md: 'absolute' },
-                top: '16px',
-                left: { xs: 0, md: 16 },
-                right: 0
-              }}
-              content={false}
-            >
-              {relatedProducts}
-            </MainCard>
-          </Grid>
+          </Stack>
         </Grid>
-      )}
-      <FloatingCart />
     </>
   );
 }
-
-TabPanel.propTypes = { children: PropTypes.any, value: PropTypes.any, index: PropTypes.any, other: PropTypes.any };

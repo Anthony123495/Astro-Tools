@@ -30,36 +30,6 @@ function Gender({ gender, handelFilter }) {
         <Skeleton variant="rectangular" width="100%" height={42} />
       ) : (
         <>
-          <Typography variant="h5">Gender</Typography>
-          <Box sx={{ pl: 0.5 }}>
-            <Stack>
-              <FormControlLabel
-                control={<Checkbox checked={gender.some((item) => item === 'male')} />}
-                onChange={() => handelFilter('gender', 'male')}
-                label="Male"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={gender.some((item) => item === 'female')}
-                    onChange={() => handelFilter('gender', 'female')}
-                    color="secondary"
-                  />
-                }
-                label="Female"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={gender.some((item) => item === 'kids')}
-                    onChange={() => handelFilter('gender', 'kids')}
-                    color="error"
-                  />
-                }
-                label="Kids"
-              />
-            </Stack>
-          </Box>
         </>
       )}
     </Stack>
@@ -91,29 +61,14 @@ function Categories({ categories, handelFilter }) {
                 label="All"
               />
               <FormControlLabel
-                control={<Checkbox checked={categories.some((item) => item === 'electronics')} />}
-                onChange={() => handelFilter('categories', 'electronics')}
-                label="Electronics"
+                control={<Checkbox checked={categories.some((item) => item === 'Visual')} />}
+                onChange={() => handelFilter('categories', 'Visual')}
+                label="Visual"
               />
               <FormControlLabel
-                control={<Checkbox checked={categories.some((item) => item === 'fashion')} />}
-                onChange={() => handelFilter('categories', 'fashion')}
-                label="Fashion"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={categories.some((item) => item === 'books')} />}
-                onChange={() => handelFilter('categories', 'books')}
-                label="Book"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={categories.some((item) => item === 'toys')} />}
-                onChange={() => handelFilter('categories', 'toys')}
-                label="Toys"
-              />
-              <FormControlLabel
-                control={<Checkbox checked={categories.some((item) => item === 'kitchen')} />}
-                onChange={() => handelFilter('categories', 'kitchen')}
-                label="Home & Kitchen"
+                control={<Checkbox checked={categories.some((item) => item === 'Imaging')} />}
+                onChange={() => handelFilter('categories', 'Imaging')}
+                label="Imaging"
               />
             </Stack>
           </Box>
@@ -142,36 +97,6 @@ function Price({ handelFilter }) {
 
   return (
     <>
-      {isPriceLoading ? (
-        <Skeleton variant="rectangular" width="100%" height={172} />
-      ) : (
-        <Stack spacing={1}>
-          <Typography variant="h5">Price</Typography>
-          <Stack direction="row" spacing={2}>
-            <Stack spacing={1}>
-              <Typography color="text.secondary">Min</Typography>
-              <TextField
-                value={value[0]}
-                InputProps={{
-                  readOnly: true
-                }}
-              />
-            </Stack>
-            <Stack spacing={1}>
-              <Typography color="text.secondary">Max</Typography>
-              <TextField
-                value={value[1]}
-                InputProps={{
-                  readOnly: true
-                }}
-              />
-            </Stack>
-          </Stack>
-          <Box sx={{ px: 0.75 }}>
-            <Slider min={0} max={1000} value={value} onChange={handleSlider} valueLabelDisplay="auto" getAriaValueText={valuetext} />
-          </Box>
-        </Stack>
-      )}
     </>
   );
 }
@@ -186,7 +111,9 @@ function RatingSection({ rating, handelFilter }) {
 
   return (
     <>
-      {isRatingLoading ? (
+    {
+      /*
+        {isRatingLoading ? (
         <Skeleton variant="rectangular" width="100%" height={172} />
       ) : (
         <Stack spacing={1}>
@@ -202,6 +129,8 @@ function RatingSection({ rating, handelFilter }) {
           </Stack>
         </Stack>
       )}
+      */
+    }
     </>
   );
 }

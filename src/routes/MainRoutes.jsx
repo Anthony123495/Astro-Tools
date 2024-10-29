@@ -92,7 +92,7 @@ const MainRoutes = {
               ]
             },
             {
-              path: 'e-commerce',
+              path: 'tools',
               children: [
                 {
                   path: 'products',
@@ -101,7 +101,7 @@ const MainRoutes = {
                   errorElement: <ErrorBoundary />
                 },
                 {
-                  path: 'product-details/:id',
+                  path: 'tool/:id',
                   element: <AppECommProductDetails />,
                   loader: productLoader,
                   errorElement: <ErrorBoundary />

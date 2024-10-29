@@ -68,11 +68,7 @@ export default function ProductsPage() {
   const initialState = {
     search: '',
     sort: 'low',
-    gender: [],
     categories: ['all'],
-    colors: [],
-    price: '',
-    rating: 0
   };
   const [filter, setFilter] = useState(initialState);
 
@@ -95,7 +91,7 @@ export default function ProductsPage() {
         <ProductCard
           id={tool.id}
           image={tool.image}
-          name={tool.name}
+          title={tool.title}
           description={tool.description}
           brand={tool.brand}
         />

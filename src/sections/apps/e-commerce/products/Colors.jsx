@@ -58,7 +58,9 @@ export default function Colors({ colors, handelFilter }) {
 
   return (
     <>
-      {isColorsLoading ? (
+    {
+      /*
+        {isColorsLoading ? (
         <Grid item xs={12}>
           <Skeleton variant="rectangular" width="100%" height={158} />
         </Grid>
@@ -74,6 +76,8 @@ export default function Colors({ colors, handelFilter }) {
           </Grid>
         </Stack>
       )}
+      */
+    }
     </>
   );
 }

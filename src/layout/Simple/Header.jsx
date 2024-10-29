@@ -102,9 +102,8 @@ export default function Header({ layout = 'landing', ...others }) {
     return (
       <ListItemButton
         key={index}
-        component={item.label === 'React MUI' ? RouterLink : 'a'}
-        {...(item.label === 'React MUI' ? { to: finalUrl } : { href: finalUrl })}
-        target={item.target}
+        to={item.url}
+        target='_blank'
       >
         <Tooltip title={item.tooltipTitle} placement="bottom">
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -112,13 +111,12 @@ export default function Header({ layout = 'landing', ...others }) {
               sx={{
                 minWidth: 'auto',
                 marginRight: 1,
-                filter: item.tooltipTitle === 'Live Preview Not Available' ? 'grayscale(1)' : ''
               }}
             >
               <CardMedia component="img" image={item.image} sx={{ width: '30px' }} />
             </ListItemAvatar>
             <ListItemText primary={item.label} />
-          </Box>
+          </Box> 
         </Tooltip>
       </ListItemButton>
     );
@@ -159,61 +157,37 @@ export default function Header({ layout = 'landing', ...others }) {
               }}
               spacing={3}
             >
-              <Link
-                className="header-link"
-                sx={{ ml: theme.direction === ThemeDirection.RTL ? 3 : 0 }}
-                color="secondary.main"
-                component={RouterLink}
-                to={ispValueAvailable ? '/login?isp=1' : '/login'}
-                target="_blank"
-                underline="none"
-              >
-                Home
-              </Link>
+              
               <Link
                 className="header-link"
                 color="secondary.main"
                 id="wallet-button"
-                href="#"
-                aria-controls={open ? 'wallet-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
                 underline="none"
-                sx={{ path: { strokeWidth: 2 }, svg: { marginBottom: '-3px' } }}
+                href="https://davidastro.com/"
+                target="_blank"
               >
-                Pages {open ? <ArrowUp2 size="16" /> : <ArrowDown2 size="16" />}
+                Guides, Articles & Tutorials
               </Link>
-              <Menu
-                id="wallet-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  'aria-labelledby': 'wallet-button',
-                  sx: { p: 1.25, minWidth: 150 }
-                }}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right'
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }}
-                sx={{ '.MuiModal-backdrop': { backgroundColor: 'unset' } }}
+
+              <Link
+                className="header-link"
+                color="secondary.main"
+                id="wallet-button"
+                href="https://davidastro.com/"
+                target="_blank"
+                underline="none"
               >
-                {listItems}
-              </Menu>
+                Our Store
+              </Link>
+              
               <Box sx={{ display: 'inline-block' }}>
                 <AnimateButton>
                   <Button
                     component={Link}
                     href='/dashboard/default/'
-                    target="_blank"
                     disableElevation
                     startIcon={<ExportSquare />}
-                    color="success"
+                    color="secondary"
                     size="large"
                     variant="contained"
                   >

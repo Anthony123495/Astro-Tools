@@ -154,21 +154,21 @@ export default function FooterBlock({ isFull }) {
               <Grid container spacing={2} alignItems="center" sx={{ justifyContent: 'flex-end' }}>
                 <Grid item>
                   <Tooltip title="Facebook">
-                    <Link href="" underline="none" target="_blank" sx={linkSX}>
+                    <Link href="https://www.facebook.com/davidastroinc/" underline="none" target="_blank" sx={linkSX}>
                       <Facebook variant="Bold" size={20} />
                     </Link>
                   </Tooltip>
                 </Grid>
                 <Grid item>
                   <Tooltip title="Instagram">
-                    <Link href="" underline="none" target="_blank" sx={linkSX}>
+                    <Link href="https://www.instagram.com/davidastroinc/" underline="none" target="_blank" sx={linkSX}>
                       <Instagram variant="Bold" size={20} />
                     </Link>
                   </Tooltip>
                 </Grid>
                 <Grid item>
                   <Tooltip title="Shop">
-                    <Link href="" underline="none" target="_blank" sx={linkSX}>
+                    <Link href="https://www.davidastro.com/" underline="none" target="_blank" sx={linkSX}>
                       <ShoppingCart variant="Bold" size={20} />
                     </Link>
                   </Tooltip>
