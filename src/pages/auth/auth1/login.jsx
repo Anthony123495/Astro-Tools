@@ -18,10 +18,13 @@ import imgFacebook from 'assets/images/auth/facebook.svg';
 import imgTwitter from 'assets/images/auth/twitter.svg';
 import imgGoogle from 'assets/images/auth/google.svg';
 
+import { account } from "lib/appwrite";
+
+
 // ================================|| LOGIN ||================================ //
 
+
 export default function Login() {
-  const { isLoggedIn } = useAuth();
 
   return (
     <AuthWrapper>
@@ -34,11 +37,6 @@ export default function Login() {
             <Grid item xs={12}>
               <AuthSocButton>
                 <img src={imgFacebook} alt="Facebook" style={{ margin: '0 10px' }} /> Sign In with Facebook
-              </AuthSocButton>
-            </Grid>
-            <Grid item xs={12}>
-              <AuthSocButton>
-                <img src={imgTwitter} alt="Facebook" style={{ margin: '0 10px' }} /> Sign In with Twitter
               </AuthSocButton>
             </Grid>
             <Grid item xs={12}>
@@ -58,7 +56,7 @@ export default function Login() {
             <Typography variant="h3">Login</Typography>
             <Typography
               component={Link}
-              to={isLoggedIn ? '/auth/register' : '/register'}
+              to={account.get() ? '/auth/register' : '/register'}
               variant="body1"
               sx={{ textDecoration: 'none' }}
               color="primary"

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigationType } from 'react-router-dom';
 import { preload } from 'swr';
 
 // material-ui
@@ -26,6 +26,8 @@ import useScriptRef from 'hooks/useScriptRef';
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
 import { fetcher } from 'utils/axios';
+import { account } from 'lib/appwrite';
+import { useNavigate } from 'react-router-dom';
 
 // assets
 import { Eye, EyeSlash } from 'iconsax-react';
@@ -34,8 +36,6 @@ import { Eye, EyeSlash } from 'iconsax-react';
 
 export default function AuthLogin({ forgot }) {
   const [checked, setChecked] = useState(false);
-
-  const { isLoggedIn, login } = useAuth();
   const scriptedRef = useScriptRef();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -47,12 +47,21 @@ export default function AuthLogin({ forgot }) {
     event.preventDefault();
   };
 
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const navigate = useNavigate();
+
+  async function login(email, password) {
+    await account.createEmailPasswordSession(email, password);
+    setLoggedInUser(await account.get());
+    navigate('/dashboard/default')
+  }
+
   return (
     <>
       <Formik
         initialValues={{
-          email: 'info@phoenixcoded.co',
-          password: '123456',
+          email: null,
+          password: null,
           submit: null
         }}
         validationSchema={Yup.object().shape({
@@ -148,10 +157,10 @@ export default function AuthLogin({ forgot }) {
                         size="small"
                       />
                     }
-                    label={<Typography variant="h6">Keep me sign in</Typography>}
+                    label={<Typography variant="h6">Keep me signed in</Typography>}
                   />
 
-                  <Link variant="h6" component={RouterLink} to={isLoggedIn && forgot ? forgot : '/forgot-password'} color="text.primary">
+                  <Link variant="h6" component={RouterLink} to={loggedInUser && forgot ? forgot : '/forgot-password'} color="text.primary">
                     Forgot Password?
                   </Link>
                 </Stack>
