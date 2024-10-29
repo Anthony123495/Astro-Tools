@@ -18,7 +18,7 @@ export default function ProductInfo({ tool }) {
         size="small"
         label={tool.brand}
         variant='light'
-        avatar={<Avatar alt="Natacha" src='/favicon.png' />}
+        avatar={<Avatar alt={tool.brand + 'Logo'} src='/favicon.png' />}
         color='primary'
         sx={{
           width: 'fit-content',
