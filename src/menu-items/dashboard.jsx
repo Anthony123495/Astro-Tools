@@ -6,6 +6,7 @@ import { useGetMenu } from 'api/menu';
 
 // assets
 import { Refresh, Home3, HomeTrendUp, Box1 } from 'iconsax-react';
+import Breadcrumbs from 'components/@extended/Breadcrumbs';
 
 const icons = {
   navigation: Home3,
@@ -27,6 +28,7 @@ const loadingMenu = {
       icon: icons.navigation,
       url: '/apps/tools',
       link: '/apps/tools',
+      breadcrumbs: false,
     },
   ]
 };

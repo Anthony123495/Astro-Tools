@@ -23,10 +23,16 @@ import defaultImages from 'assets/images/users/default.png';
 // assets
 import { CallCalling, Gps, Link1, Sms } from 'iconsax-react';
 
+
+import useAuth from 'hooks/useAuth';
+
+
 // ==============================|| ACCOUNT PROFILE - BASIC ||============================== //
 
 export default function TabProfile() {
   const matchDownMD = useMediaQuery((theme) => theme.breakpoints.down('md'));
+
+  const {user} = useAuth()
 
   return (
     <Grid container spacing={3}>
@@ -37,21 +43,23 @@ export default function TabProfile() {
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <Stack direction="row" justifyContent="flex-end">
-                    <Chip label="Pro" size="small" color="primary" />
+                    <Chip label={'ID: ' + user.id} size="small" color="primary" />
                   </Stack>
                   <Stack spacing={2.5} alignItems="center">
-                    <Avatar alt="Avatar 1" size="xl" src={defaultImages} />
+                    <Avatar alt={user?.avatar || 'Avatar 1'} size="xl" src={user?.avatar || defaultImages} />
                     <Stack spacing={0.5} alignItems="center">
-                      <Typography variant="h5">Anshan H.</Typography>
-                      <Typography color="secondary">Project Manager</Typography>
+                      <Typography variant="h5">{user.name}</Typography>
+                      <Typography color="secondary">{user.role}</Typography>
                     </Stack>
                   </Stack>
                 </Grid>
                 <Grid item xs={12}>
                   <Divider />
                 </Grid>
-                <Grid item xs={12}>
-                  <Stack direction="row" justifyContent="space-around" alignItems="center">
+                
+                    {/*
+                    <Grid item xs={12}>
+                    <Stack direction="row" justifyContent="space-around" alignItems="center">
                     <Stack spacing={0.5} alignItems="center">
                       <Typography variant="h5">86</Typography>
                       <Typography color="secondary">Post</Typography>
@@ -67,10 +75,11 @@ export default function TabProfile() {
                       <Typography color="secondary">Members</Typography>
                     </Stack>
                   </Stack>
-                </Grid>
-                <Grid item xs={12}>
+                    </Grid>
+                    <Grid item xs={12}>
                   <Divider />
                 </Grid>
+                    */}
                 <Grid item xs={12}>
                   <List component="nav" aria-label="main mailbox folders" sx={{ py: 0, '& .MuiListItem-root': { p: 0, py: 1 } }}>
                     <ListItem>
@@ -78,7 +87,7 @@ export default function TabProfile() {
                         <Sms size={18} />
                       </ListItemIcon>
                       <ListItemSecondaryAction>
-                        <Typography align="right">anshan.dh81@gmail.com</Typography>
+                        <Typography align="right">{user.email}</Typography>
                       </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -86,9 +95,10 @@ export default function TabProfile() {
                         <CallCalling size={18} />
                       </ListItemIcon>
                       <ListItemSecondaryAction>
-                        <Typography align="right">(+1-876) 8654 239 581</Typography>
+                        <Typography align="right">{user?.phone || 'No Phone Number'}</Typography>
                       </ListItemSecondaryAction>
                     </ListItem>
+                    {/* 
                     <ListItem>
                       <ListItemIcon>
                         <Gps size={18} />
@@ -96,7 +106,7 @@ export default function TabProfile() {
                       <ListItemSecondaryAction>
                         <Typography align="right">New York</Typography>
                       </ListItemSecondaryAction>
-                    </ListItem>
+                    </ListItem> 
                     <ListItem>
                       <ListItemIcon>
                         <Link1 size={18} />
@@ -107,12 +117,13 @@ export default function TabProfile() {
                         </Link>
                       </ListItemSecondaryAction>
                     </ListItem>
+                     */}
                   </List>
                 </Grid>
               </Grid>
             </MainCard>
           </Grid>
-          <Grid item xs={12}>
+          {/*<Grid item xs={12}>
             <MainCard title="Skills">
               <Grid container spacing={1.25}>
                 <Grid item xs={6}>
@@ -153,7 +164,7 @@ export default function TabProfile() {
                 </Grid>
               </Grid>
             </MainCard>
-          </Grid>
+          </Grid>  */}
         </Grid>
       </Grid>
       <Grid item xs={12} sm={7} md={8} xl={9}>
@@ -161,8 +172,7 @@ export default function TabProfile() {
           <Grid item xs={12}>
             <MainCard title="About me">
               <Typography color="secondary">
-                Hello, I’m Anshan Handgun Creative Graphic Designer & User Experience Designer based in Website, I create digital Products a
-                more Beautiful and usable place. Morbid accusant ipsum. Nam nec tellus at.
+                No Bio Yet.
               </Typography>
             </MainCard>
           </Grid>
@@ -174,13 +184,7 @@ export default function TabProfile() {
                     <Grid item xs={12} md={6}>
                       <Stack spacing={0.5}>
                         <Typography color="secondary">Full Name</Typography>
-                        <Typography>Anshan Handgun</Typography>
-                      </Stack>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <Stack spacing={0.5}>
-                        <Typography color="secondary">Father Name</Typography>
-                        <Typography>Mr. Deepen Handgun</Typography>
+                        <Typography>{user.name}</Typography>
                       </Stack>
                     </Grid>
                   </Grid>
@@ -191,14 +195,8 @@ export default function TabProfile() {
                       <Stack spacing={0.5}>
                         <Typography color="secondary">Phone</Typography>
                         <Typography>
-                          (+1-876) <PatternFormat value={8654239581} displayType="text" type="text" format="#### ### ###" />
+                          (+1) {user?.phone || 'xxx xxx xxxx'}
                         </Typography>
-                      </Stack>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <Stack spacing={0.5}>
-                        <Typography color="secondary">Country</Typography>
-                        <Typography>New York</Typography>
                       </Stack>
                     </Grid>
                   </Grid>
@@ -208,27 +206,17 @@ export default function TabProfile() {
                     <Grid item xs={12} md={6}>
                       <Stack spacing={0.5}>
                         <Typography color="secondary">Email</Typography>
-                        <Typography>anshan.dh81@gmail.com</Typography>
-                      </Stack>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <Stack spacing={0.5}>
-                        <Typography color="secondary">Zip Code</Typography>
-                        <Typography>956 754</Typography>
+                        <Typography>{user.email}</Typography>
                       </Stack>
                     </Grid>
                   </Grid>
                 </ListItem>
-                <ListItem>
-                  <Stack spacing={0.5}>
-                    <Typography color="secondary">Address</Typography>
-                    <Typography>Street 110-B Kalians Bag, Dewan, M.P. New York</Typography>
-                  </Stack>
-                </ListItem>
               </List>
             </MainCard>
           </Grid>
-          <Grid item xs={12}>
+          {
+            /*
+                        <Grid item xs={12}>
             <MainCard title="Education">
               <List sx={{ py: 0 }}>
                 <ListItem divider>
@@ -323,6 +311,8 @@ export default function TabProfile() {
               </List>
             </MainCard>
           </Grid>
+            */
+          }
         </Grid>
       </Grid>
     </Grid>

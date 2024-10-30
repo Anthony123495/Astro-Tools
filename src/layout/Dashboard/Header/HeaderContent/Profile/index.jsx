@@ -36,6 +36,7 @@ import useAuth from 'hooks/useAuth';
 // assets
 import avatar1 from 'assets/images/users/avatar-6.png';
 import { Setting2, Profile, Logout } from 'iconsax-react';
+import { Chip } from '@mui/material';
 
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
@@ -126,7 +127,7 @@ export default function ProfilePage() {
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        <Avatar alt="profile user" src={avatar1} />
+        <Avatar alt="profile user" src={user?.avatar} />
       </ButtonBase>
       <Popper
         placement="bottom-end"
@@ -155,11 +156,12 @@ export default function ProfilePage() {
                     <Grid container justifyContent="space-between" alignItems="center">
                       <Grid item>
                         <Stack direction="row" spacing={1.25} alignItems="center">
-                          <Avatar alt="profile user" src={avatar1} />
+                          <Avatar alt="profile user" src={user.avatar} />
                           <Stack>
                             <Typography variant="subtitle1">{user?.name || "Guest"}</Typography>
+                            <Chip label={'ID: ' + user.id.substring(0,10) + '...'} size="small" color="primary" />
                             <Typography variant="body2" color="secondary">
-                              Amateur Astronomer
+                              {user?.role || 'Amateur Astronomer'}
                             </Typography>
                           </Stack>
                         </Stack>

@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 // project-imports
 import useAuth from 'hooks/useAuth';
-
+import { APP_DEFAULT_PATH } from 'config';
 // ==============================|| AUTH GUARD ||============================== //
 
 export default function AuthGuard({ children }) {
@@ -14,9 +14,9 @@ export default function AuthGuard({ children }) {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate('login', {
+      navigate('/login', {
         state: {
-          from: location.pathname
+          from: ''
         },
         replace: true
       });

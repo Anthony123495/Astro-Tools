@@ -50,7 +50,9 @@ export const FirebaseProvider = ({ children }) => {
                 id: user.uid,
                 email: user.email,
                 name: user.displayName || 'Jupiter',
-                role: 'Amateur Astronomer'
+                role: 'Amateur Astronomer',
+                phone: user.phoneNumber,
+                avatar: user.photoURL,
               }
             }
           });
