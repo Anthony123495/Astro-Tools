@@ -49,8 +49,8 @@ export const FirebaseProvider = ({ children }) => {
               user: {
                 id: user.uid,
                 email: user.email,
-                name: user.displayName || 'Stebin Ben',
-                role: 'UI/UX Designer'
+                name: user.displayName || 'Jupiter',
+                role: 'Amateur Astronomer'
               }
             }
           });

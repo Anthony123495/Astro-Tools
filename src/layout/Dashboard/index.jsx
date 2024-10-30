@@ -46,7 +46,7 @@ export default function MainLayout() {
   if (menuMasterLoading) return <Loader />;
 
   return (
-    <AuthGuard>
+    //<AuthGuard>
       <Box sx={{ display: 'flex', width: '100%' }}>
         <Header />
         {!isHorizontal ? <Drawer /> : <HorizontalBar />}
@@ -71,6 +71,6 @@ export default function MainLayout() {
         </Box>
         <AddCustomer />
       </Box>
-    </AuthGuard>
+    //</AuthGuard>
   );
 }

@@ -47,10 +47,10 @@ const MainRoutes = {
       element: <DashboardLayout />,
       children: [
         {
-          path: 'dashboard',
+          path: 'apps',
           children: [
             {
-              path: 'default',
+              path: 'tools',
               element: <DashboardDefault />
             }
           ]

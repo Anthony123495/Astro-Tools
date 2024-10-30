@@ -64,7 +64,7 @@ export default function ProductsHeader({ filter, handleDrawerOpen, setFilter }) 
           </Button>
 
           <TextField
-            sx={{ '& .MuiOutlinedInput-input': { pl: 0 } }}
+            sx={{ '& .MuiOutlinedInput-input': { pl: 0} }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -78,7 +78,8 @@ export default function ProductsHeader({ filter, handleDrawerOpen, setFilter }) 
             onChange={handleSearch}
           />
         </Stack>
-        <Button
+        {/*
+                <Button
           id="demo-positioned-button"
           aria-controls="demo-positioned-menu"
           aria-haspopup="true"
@@ -92,6 +93,7 @@ export default function ProductsHeader({ filter, handleDrawerOpen, setFilter }) 
         >
           {sortLabel.length > 0 && sortLabel[0].label}
         </Button>
+        */}
         <Menu
           id="demo-positioned-menu"
           aria-labelledby="demo-positioned-button"

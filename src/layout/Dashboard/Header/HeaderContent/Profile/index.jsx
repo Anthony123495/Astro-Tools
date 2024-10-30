@@ -17,6 +17,11 @@ import Tabs from '@mui/material/Tabs';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
+import Link from '@mui/material/Link';
+import ListItemButton from '@mui/material/ListItemButton';
+import { Messages1 } from 'iconsax-react';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 // project-imports
 import ProfileTab from './ProfileTab';
 import SettingTab from './SettingTab';
@@ -62,6 +67,15 @@ export default function ProfilePage() {
   const navigate = useNavigate();
 
   const { logout, user } = useAuth();
+
+  function isLoggedIn() {
+    if (user) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -143,20 +157,28 @@ export default function ProfilePage() {
                         <Stack direction="row" spacing={1.25} alignItems="center">
                           <Avatar alt="profile user" src={avatar1} />
                           <Stack>
-                            <Typography variant="subtitle1">{user?.name}</Typography>
+                            <Typography variant="subtitle1">{user?.name || "Guest"}</Typography>
                             <Typography variant="body2" color="secondary">
                               Amateur Astronomer
                             </Typography>
                           </Stack>
                         </Stack>
                       </Grid>
-                      <Grid item>
-                        <Tooltip title="Logout">
-                          <IconButton size="large" color="error" sx={{ p: 1 }} onClick={handleLogout}>
-                            <Logout variant="Bulk" />
-                          </IconButton>
-                        </Tooltip>
-                      </Grid>
+                      {user ? (
+                      <>
+                        <Grid item>
+                          <Tooltip title="Logout">
+                            <IconButton size="large" color="error" sx={{ p: 1 }} onClick={handleLogout}>
+                              <Logout variant="Bulk" />
+                            </IconButton>
+                          </Tooltip>
+                        </Grid>
+                      </>
+                        ) : (
+                          <>
+                          
+                          </>
+                        )}
                     </Grid>
                   </CardContent>
 
@@ -188,12 +210,32 @@ export default function ProfilePage() {
                       />
                     </Tabs>
                   </Box>
-                  <TabPanel value={value} index={0} dir={theme.direction}>
-                    <ProfileTab handleLogout={handleLogout} />
-                  </TabPanel>
-                  <TabPanel value={value} index={1} dir={theme.direction}>
-                    <SettingTab />
-                  </TabPanel>
+                  {user ? (
+                    <>
+                      <TabPanel value={value} index={0} dir={theme.direction}>
+                        <ProfileTab handleLogout={handleLogout} />
+                      </TabPanel>
+                      <TabPanel value={value} index={1} dir={theme.direction}>
+                        <SettingTab />
+                      </TabPanel>
+                    </>
+                  ) : (
+                    <>
+                      <TabPanel value={value} index={0} dir={theme.direction}>
+                        <Link style={{ textDecoration: 'none' }} href="/login">
+                          <ListItemButton>
+                            <ListItemIcon>
+                              <Messages1 variant="Bulk" size={18} />
+                            </ListItemIcon>
+                            <ListItemText primary="Login" />
+                          </ListItemButton>
+                        </Link>
+                      </TabPanel>
+                      <TabPanel value={value} index={1} dir={theme.direction}>
+                        <SettingTab />
+                      </TabPanel>
+                    </>
+                  )}
                 </MainCard>
               </ClickAwayListener>
             </Paper>

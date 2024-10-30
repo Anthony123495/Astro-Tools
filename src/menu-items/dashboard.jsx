@@ -16,32 +16,18 @@ const icons = {
 
 const loadingMenu = {
   id: 'group-dashboard-loading',
-  title: <FormattedMessage id="dashboard" />,
+  title: <FormattedMessage id="Tools" />,
   type: 'group',
-  icon: icons.loading,
+  icon: icons.navigation,
   children: [
     {
-      id: 'dashboard1',
-      title: <FormattedMessage id="dashboard" />,
-      type: 'collapse',
-      icon: icons.loading,
-      children: [
-        {
-          id: 'default1',
-          title: 'loading',
-          type: 'item',
-          url: '/dashboard/default',
-          breadcrumbs: false
-        },
-        {
-          id: 'analytics1',
-          title: 'loading',
-          type: 'item',
-          url: '/dashboard/analytics',
-          breadcrumbs: false
-        }
-      ]
-    }
+      id: 'tool-list',
+      title: <FormattedMessage id="All Tools"/>,
+      type: 'item',
+      icon: icons.navigation,
+      url: '/apps/tools',
+      link: '/apps/tools',
+    },
   ]
 };
 

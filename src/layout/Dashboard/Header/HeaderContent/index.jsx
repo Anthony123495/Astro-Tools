@@ -27,11 +27,12 @@ export default function HeaderContent() {
 
   const megaMenu = useMemo(() => <MegaMenuSection />, []);
 
+  //{!downLG && megaMenu}
   return (
     <>
       {menuOrientation === MenuOrientation.HORIZONTAL && !downLG && <DrawerHeader open={true} />}
       {!downLG && <Search />}
-      {!downLG && megaMenu}
+      
       {!downLG && localization}
       {downLG && <Box sx={{ width: '100%', ml: 1 }} />}
       <Message />

@@ -24,7 +24,6 @@ export default function DrawerContent() {
         <Navigation />
         {drawerOpen && !matchDownMD && <NavCard />}
       </SimpleBar>
-      <NavUser />
     </>
   );
 }

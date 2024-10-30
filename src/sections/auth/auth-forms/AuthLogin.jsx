@@ -1,20 +1,19 @@
-import PropTypes from 'prop-types';
-import { useState } from 'react';
-import { Link as RouterLink, useNavigationType } from 'react-router-dom';
-import { preload } from 'swr';
+import { useState, FocusEvent, SyntheticEvent } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 // material-ui
-import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
-import Stack from '@mui/material/Stack';
-import Link from '@mui/material/Link';
-import InputLabel from '@mui/material/InputLabel';
-import Typography from '@mui/material/Typography';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
+import Divider from '@mui/material/Divider';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import InputAdornment from '@mui/material/InputAdornment';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 // third-party
 import * as Yup from 'yup';
@@ -23,19 +22,20 @@ import { Formik } from 'formik';
 // project-imports
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
+import FirebaseSocial from './FirebaseSocial';
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
-import { fetcher } from 'utils/axios';
-import { account } from 'lib/appwrite';
-import { useNavigate } from 'react-router-dom';
 
 // assets
 import { Eye, EyeSlash } from 'iconsax-react';
 
-// ============================|| JWT - LOGIN ||============================ //
+// ============================|| FIREBASE - LOGIN ||============================ //
 
 export default function AuthLogin({ forgot }) {
   const [checked, setChecked] = useState(false);
+  const [capsWarning, setCapsWarning] = useState(false);
+
+  const { isLoggedIn, firebaseEmailPasswordSignIn } = useAuth();
   const scriptedRef = useScriptRef();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -47,21 +47,20 @@ export default function AuthLogin({ forgot }) {
     event.preventDefault();
   };
 
-  const [loggedInUser, setLoggedInUser] = useState(null);
-  const navigate = useNavigate();
-
-  async function login(email, password) {
-    await account.createEmailPasswordSession(email, password);
-    setLoggedInUser(await account.get());
-    navigate('/dashboard/default')
-  }
+  const onKeyDown = (keyEvent) => {
+    if (keyEvent.getModifierState('CapsLock')) {
+      setCapsWarning(true);
+    } else {
+      setCapsWarning(false);
+    }
+  };
 
   return (
     <>
       <Formik
         initialValues={{
-          email: null,
-          password: null,
+          email: 'info@phoenixcoded.co',
+          password: '123456',
           submit: null
         }}
         validationSchema={Yup.object().shape({
@@ -70,12 +69,19 @@ export default function AuthLogin({ forgot }) {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            await login(values.email, values.password);
-            if (scriptedRef.current) {
-              setStatus({ success: true });
-              setSubmitting(false);
-              preload('api/menu/dashboard', fetcher); // load menu on login success
-            }
+            await firebaseEmailPasswordSignIn(values.email, values.password).then(
+              () => {
+                // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
+                // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.
+                // To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+                // github issue: https://github.com/formium/formik/issues/2430
+              },
+              (err) => {
+                setStatus({ success: false });
+                setErrors({ submit: err.message });
+                setSubmitting(false);
+              }
+            );
           } catch (err) {
             console.error(err);
             if (scriptedRef.current) {
@@ -115,12 +121,17 @@ export default function AuthLogin({ forgot }) {
                   <InputLabel htmlFor="password-login">Password</InputLabel>
                   <OutlinedInput
                     fullWidth
+                    color={capsWarning ? 'warning' : 'primary'}
                     error={Boolean(touched.password && errors.password)}
                     id="-password-login"
                     type={showPassword ? 'text' : 'password'}
                     value={values.password}
                     name="password"
-                    onBlur={handleBlur}
+                    onBlur={(event) => {
+                      setCapsWarning(false);
+                      handleBlur(event);
+                    }}
+                    onKeyDown={onKeyDown}
                     onChange={handleChange}
                     endAdornment={
                       <InputAdornment position="end">
@@ -137,6 +148,11 @@ export default function AuthLogin({ forgot }) {
                     }
                     placeholder="Enter password"
                   />
+                  {capsWarning && (
+                    <Typography variant="caption" sx={{ color: 'warning.main' }} id="warning-helper-text-password-login">
+                      Caps lock on!
+                    </Typography>
+                  )}
                 </Stack>
                 {touched.password && errors.password && (
                   <FormHelperText error id="standard-weight-helper-text-password-login">
@@ -157,10 +173,14 @@ export default function AuthLogin({ forgot }) {
                         size="small"
                       />
                     }
-                    label={<Typography variant="h6">Keep me signed in</Typography>}
+                    label={<Typography variant="h6">Keep me sign in</Typography>}
                   />
-
-                  <Link variant="h6" component={RouterLink} to={loggedInUser && forgot ? forgot : '/forgot-password'} color="text.primary">
+                  <Link
+                    variant="h6"
+                    component={RouterLink}
+                    to={isLoggedIn ? '/auth/forgot-password' : '/forgot-password'}
+                    color="text.primary"
+                  >
                     Forgot Password?
                   </Link>
                 </Stack>
@@ -177,6 +197,14 @@ export default function AuthLogin({ forgot }) {
                   </Button>
                 </AnimateButton>
               </Grid>
+              <Grid item xs={12}>
+                <Divider>
+                  <Typography variant="caption"> Login with</Typography>
+                </Divider>
+              </Grid>
+              <Grid item xs={12}>
+                <FirebaseSocial />
+              </Grid>
             </Grid>
           </form>
         )}
@@ -184,5 +212,3 @@ export default function AuthLogin({ forgot }) {
     </>
   );
 }
-
-AuthLogin.propTypes = { forgot: PropTypes.string };

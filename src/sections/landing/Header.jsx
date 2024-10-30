@@ -113,7 +113,7 @@ export default function HeroPage() {
                       <AnimateButton>
                         <Button
                           component={RouterLink}
-                          to='/dashboard/default/'
+                          to='/apps/tools'
                           size="large"
                           color="secondary"
                           variant="outlined"

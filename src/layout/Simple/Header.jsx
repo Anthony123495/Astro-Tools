@@ -184,7 +184,7 @@ export default function Header({ layout = 'landing', ...others }) {
                 <AnimateButton>
                   <Button
                     component={Link}
-                    href='/dashboard/default/'
+                    href='/apps/tools'
                     disableElevation
                     startIcon={<ExportSquare />}
                     color="secondary"
@@ -212,7 +212,7 @@ export default function Header({ layout = 'landing', ...others }) {
                   <AnimateButton>
                     <Button
                       component={Link}
-                      href='/dashboard/default/'
+                      href='/apps/tools'
                       target="_blank"
                       disableElevation
                       startIcon={<ExportSquare />}
