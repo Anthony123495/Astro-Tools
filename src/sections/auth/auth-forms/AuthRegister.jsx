@@ -23,7 +23,6 @@ import { Formik } from 'formik';
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
 import FirebaseSocial from './FirebaseSocial';
-import firebase from 'firebase';
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
@@ -35,10 +34,6 @@ import { Eye, EyeSlash } from 'iconsax-react';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 export default function AuthRegister() {
-
-  const db = firebase.firestore();
-
-  const auth = getAuth();
 
   const { firebaseRegister } = useAuth();
   const scriptedRef = useScriptRef();

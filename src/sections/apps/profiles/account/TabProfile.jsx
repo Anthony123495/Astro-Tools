@@ -40,14 +40,10 @@ export default function TabProfile() {
 
   const [open, setOpen] = useState(false);
 
-  const copyToClipBoardUserId = () => {
+  function handleCopyClipboard(copyElement) {
     setOpen(true);
-    navigator.clipboard.writeText(user.id);
-  };
-
-  const copyToClipBoardUsername = () => {
-    setOpen(true);
-    navigator.clipboard.writeText(user.email.split('@')[0]);
+    navigator.clipboard.writeText(copyElement);
+    //console.log(`${copyElement} has been copied!`)
   }
 
 
@@ -61,7 +57,7 @@ export default function TabProfile() {
                 <Grid item xs={12}>
                   <Stack spacing={2.5} alignItems="center">
                     <CustomTooltip title='If you need support, give us this identification' arrow color='primary' >
-                      <Chip label={user.id} size="small" color="primary" onClick={copyToClipBoardUserId} />
+                      <Chip label={user.id} size="small" color="primary" onClick={() => handleCopyClipboard(user.id)} />
                     </CustomTooltip>                    
                   </Stack>
                   <Snackbar 
@@ -75,7 +71,7 @@ export default function TabProfile() {
                   <Stack spacing={2.5} alignItems="center">
                     <Avatar alt={user?.avatar || 'Avatar 1'} size="xl" src={user?.avatar ||  avatar1} />
                     <Stack spacing={0.5} alignItems="center">
-                      <Typography variant="h5" sx={{cursor: 'pointer'}} onClick={copyToClipBoardUsername}>@{user.email.split('@')[0]}</Typography>
+                      <Typography variant="h5" sx={{cursor: 'pointer'}} onClick={() => handleCopyClipboard(user.email.split('@')[0])}>@{user.email.split('@')[0]}</Typography>
                       <Typography color="secondary">{user.role}</Typography>
                     </Stack>
                   </Stack>
@@ -114,7 +110,7 @@ export default function TabProfile() {
                         <Sms size={18} />
                       </ListItemIcon>
                       <ListItemSecondaryAction>
-                        <Typography align="right">{user.email}</Typography>
+                        <Typography sx={{cursor: 'pointer'}} align="right" onClick={() => handleCopyClipboard(user.email)}>{user.email}</Typography>
                       </ListItemSecondaryAction>
                     </ListItem>
                     <ListItem>
@@ -211,7 +207,12 @@ export default function TabProfile() {
                     <Grid item xs={12} md={6}>
                       <Stack spacing={0.5}>
                         <Typography color="secondary">Full Name</Typography>
-                        <Typography>{user.name}</Typography>
+                        { user.name ? (
+                        <Typography sx={{cursor: 'pointer'}} onClick={() => handleCopyClipboard(user.name)}>{user.name}</Typography>
+                        ): (
+                          <Typography>No Name</Typography>
+                        )
+                        }
                       </Stack>
                     </Grid>
                   </Grid>
@@ -233,7 +234,7 @@ export default function TabProfile() {
                     <Grid item xs={12} md={6}>
                       <Stack spacing={0.5}>
                         <Typography color="secondary">Email</Typography>
-                        <Typography>{user.email}</Typography>
+                        <Typography  sx={{cursor: 'pointer'}} onClick={() => handleCopyClipboard(user.email)}>{user.email}</Typography>
                       </Stack>
                     </Grid>
                   </Grid>
