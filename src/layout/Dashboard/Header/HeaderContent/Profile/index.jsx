@@ -127,7 +127,7 @@ export default function ProfilePage() {
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        <Avatar alt="profile user" src={user?.avatar} />
+        <Avatar alt="profile user" src={user?.avatar || avatar1} />
       </ButtonBase>
       <Popper
         placement="bottom-end"
@@ -156,10 +156,19 @@ export default function ProfilePage() {
                     <Grid container justifyContent="space-between" alignItems="center">
                       <Grid item>
                         <Stack direction="row" spacing={1.25} alignItems="center">
-                          <Avatar alt="profile user" src={user.avatar} />
+                          <Avatar alt="profile user" src={user?.avatar || avatar1} />
                           <Stack>
-                            <Typography variant="subtitle1">{user?.name || "Guest"}</Typography>
-                            <Chip label={'ID: ' + user.id.substring(0,10) + '...'} size="small" color="primary" />
+                            {user ? (
+                              <Typography variant="subtitle1">@{user.email.split('@')[0].slice(0,15) + '...'}</Typography>
+                            ) : (
+                              <Typography variant="subtitle1">Guest</Typography>
+                            )}
+                            {user ? (
+                            <Chip label={user.id.slice(0,6) + '...'} size="small" color="primary" />
+                            ):(
+                              <>
+                              </>
+                            )}
                             <Typography variant="body2" color="secondary">
                               {user?.role || 'Amateur Astronomer'}
                             </Typography>

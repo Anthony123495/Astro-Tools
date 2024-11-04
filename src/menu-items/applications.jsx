@@ -23,6 +23,21 @@ const icons = {
 // ==============================|| MENU ITEMS - APPLICATIONS ||============================== //
 
 const applications = {
+  id: 'group-dashboard-loading',
+  title: <FormattedMessage id="Tools" />,
+  type: 'group',
+  icon: icons.navigation,
+  children: [
+    {
+      id: 'tool-list',
+      title: <FormattedMessage id="All Tools"/>,
+      type: 'item',
+      icon: icons.navigation,
+      url: '/apps/tools',
+      link: '/apps/tools',
+      breadcrumbs: false,
+    },
+  ],
   id: 'group-applications',
   title: <FormattedMessage id="applications" />,
   icon: icons.applications,

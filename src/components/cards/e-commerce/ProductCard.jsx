@@ -20,7 +20,6 @@ import MainCard from 'components/MainCard';
 import IconButton from 'components/@extended/IconButton';
 import SkeletonProductPlaceholder from 'components/cards/skeleton/ProductPlaceholder';
 
-import { useGetCart, addToCart } from 'api/cart';
 import { openSnackbar } from 'api/snackbar';
 import { ImagePath, getImageUrl } from 'utils/getImageUrl';
 

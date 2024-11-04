@@ -166,7 +166,7 @@ export default function Header({ layout = 'landing', ...others }) {
                 href="https://davidastro.com/"
                 target="_blank"
               >
-                Guides, Articles & Tutorials
+                Knowledge
               </Link>
 
               <Link
@@ -207,24 +207,50 @@ export default function Header({ layout = 'landing', ...others }) {
               <Typography sx={{ textAlign: 'left', display: 'inline-block' }}>
                 <Logo to="/" />
               </Typography>
-              <Stack direction="row" spacing={2}>
-                {layout !== 'component' && (
-                  <AnimateButton>
-                    <Button
-                      component={Link}
-                      href='/apps/tools'
-                      target="_blank"
-                      disableElevation
-                      startIcon={<ExportSquare />}
-                      color="success"
-                      size="large"
-                      variant="contained"
-                    >
-                      Explore our tools
-                    </Button>
-                  </AnimateButton>
-                )}
-              </Stack>
+              <Chip
+                label={import.meta.env.VITE_APP_VERSION}
+                variant="outlined"
+                size="small"
+                color="secondary"
+                sx={{ mt: 0.5, ml: 1, fontSize: '0.725rem', height: 20, '& .MuiChip-label': { px: 0.5 } }}
+              />
+              <Link
+                className="header-link"
+                color="secondary.main"
+                id="wallet-button"
+                underline="none"
+                href="https://davidastro.com/"
+                target="_blank"
+              >
+                Knowledge
+              </Link>
+
+              <Link
+                className="header-link"
+                color="secondary.main"
+                id="wallet-button"
+                href="https://davidastro.com/"
+                target="_blank"
+                underline="none"
+              >
+                Our Store
+              </Link>
+              
+              <Box sx={{ display: 'inline-block' }}>
+                <AnimateButton>
+                  <Button
+                    component={Link}
+                    href='/apps/tools'
+                    disableElevation
+                    startIcon={<ExportSquare />}
+                    color="secondary"
+                    size="large"
+                    variant="contained"
+                  >
+                    Explore our tools
+                  </Button>
+                </AnimateButton>
+              </Box>
             </Box>
           </Toolbar>
         </Container>

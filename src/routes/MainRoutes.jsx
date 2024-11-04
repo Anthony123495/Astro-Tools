@@ -21,7 +21,6 @@ const UserTabSettings = Loadable(lazy(() => import('sections/apps/profiles/user/
 const AccountProfile = Loadable(lazy(() => import('pages/apps/profiles/account')));
 const AccountTabProfile = Loadable(lazy(() => import('sections/apps/profiles/account/TabProfile')));
 
-const AppECommProducts = Loadable(lazy(() => import('pages/apps/e-commerce/product')));
 const AppECommProductDetails = Loadable(lazy(() => import('pages/apps/e-commerce/product-details')));
 
 // pages routing
@@ -95,15 +94,8 @@ const MainRoutes = {
               path: 'tools',
               children: [
                 {
-                  path: 'products',
-                  element: <AppECommProducts />,
-                  loader: productsLoader,
-                  errorElement: <ErrorBoundary />
-                },
-                {
                   path: 'tool/:id',
                   element: <AppECommProductDetails />,
-                  loader: productLoader,
                   errorElement: <ErrorBoundary />
                 },
               ]

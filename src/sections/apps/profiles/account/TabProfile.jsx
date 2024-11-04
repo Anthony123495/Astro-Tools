@@ -17,22 +17,39 @@ import { PatternFormat } from 'react-number-format';
 import MainCard from 'components/MainCard';
 import Avatar from 'components/@extended/Avatar';
 import LinearWithLabel from 'components/@extended/progress/LinearWithLabel';
-
-import defaultImages from 'assets/images/users/default.png';
+import avatar1 from 'assets/images/users/avatar-6.png';
 
 // assets
-import { CallCalling, Gps, Link1, Sms } from 'iconsax-react';
+import { CallCalling, Gps, Link1, Logout, Sms } from 'iconsax-react';
 
 
 import useAuth from 'hooks/useAuth';
+import { Button, Snackbar, Tooltip } from '@mui/material';
+import IconButton from 'components/@extended/IconButton';
+import { EmojiHappy } from 'iconsax-react';
+import CustomTooltip from 'components/@extended/Tooltip';
+import { useState } from 'react';
+
 
 
 // ==============================|| ACCOUNT PROFILE - BASIC ||============================== //
 
 export default function TabProfile() {
   const matchDownMD = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const {user, logout} = useAuth()
 
-  const {user} = useAuth()
+  const [open, setOpen] = useState(false);
+
+  const copyToClipBoardUserId = () => {
+    setOpen(true);
+    navigator.clipboard.writeText(user.id);
+  };
+
+  const copyToClipBoardUsername = () => {
+    setOpen(true);
+    navigator.clipboard.writeText(user.email.split('@')[0]);
+  }
+
 
   return (
     <Grid container spacing={3}>
@@ -42,13 +59,23 @@ export default function TabProfile() {
             <MainCard>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
-                  <Stack direction="row" justifyContent="flex-end">
-                    <Chip label={'ID: ' + user.id} size="small" color="primary" />
-                  </Stack>
                   <Stack spacing={2.5} alignItems="center">
-                    <Avatar alt={user?.avatar || 'Avatar 1'} size="xl" src={user?.avatar || defaultImages} />
+                    <CustomTooltip title='If you need support, give us this identification' arrow color='primary' >
+                      <Chip label={user.id} size="small" color="primary" onClick={copyToClipBoardUserId} />
+                    </CustomTooltip>                    
+                  </Stack>
+                  <Snackbar 
+                    message="Copied to clipboard"
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                    autoHideDuration={2000}
+                    onClose={() => setOpen(false)}
+                    open={open}
+                  />
+                  <br />
+                  <Stack spacing={2.5} alignItems="center">
+                    <Avatar alt={user?.avatar || 'Avatar 1'} size="xl" src={user?.avatar ||  avatar1} />
                     <Stack spacing={0.5} alignItems="center">
-                      <Typography variant="h5">{user.name}</Typography>
+                      <Typography variant="h5" sx={{cursor: 'pointer'}} onClick={copyToClipBoardUsername}>@{user.email.split('@')[0]}</Typography>
                       <Typography color="secondary">{user.role}</Typography>
                     </Stack>
                   </Stack>
@@ -195,7 +222,7 @@ export default function TabProfile() {
                       <Stack spacing={0.5}>
                         <Typography color="secondary">Phone</Typography>
                         <Typography>
-                          (+1) {user?.phone || 'xxx xxx xxxx'}
+                          {user?.phone || 'No Phone Number'}
                         </Typography>
                       </Stack>
                     </Grid>

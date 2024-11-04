@@ -23,17 +23,23 @@ import { Formik } from 'formik';
 import IconButton from 'components/@extended/IconButton';
 import AnimateButton from 'components/@extended/AnimateButton';
 import FirebaseSocial from './FirebaseSocial';
-
+import firebase from 'firebase';
 import useAuth from 'hooks/useAuth';
 import useScriptRef from 'hooks/useScriptRef';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
-
 // assets
 import { Eye, EyeSlash } from 'iconsax-react';
 
 // ============================|| FIREBASE - REGISTER ||============================ //
 
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+
 export default function AuthRegister() {
+
+  const db = firebase.firestore();
+
+  const auth = getAuth();
+
   const { firebaseRegister } = useAuth();
   const scriptedRef = useScriptRef();
 
@@ -59,27 +65,22 @@ export default function AuthRegister() {
   return (
     <Formik
       initialValues={{
-        firstname: '',
-        lastname: '',
+        //firstname: '',
+        //lastname: '',
         email: '',
-        company: '',
         password: '',
         submit: null
       }}
       validationSchema={Yup.object().shape({
-        firstname: Yup.string().max(255).required('First Name is required'),
-        lastname: Yup.string().max(255).required('Last Name is required'),
+        //firstname: Yup.string().max(255).required('First Name is required'),
+        //lastname: Yup.string().max(255).required('Last Name is required'),
         email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
         password: Yup.string().max(255).required('Password is required')
       })}
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
-          await firebaseRegister(values.email, values.password).then(
+              await firebaseRegister(values.email, values.password).then(
             () => {
-              // WARNING: do not set any formik state here as formik might be already destroyed here. You may get following error by doing so.
-              // Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application.
-              // To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
-              // github issue: https://github.com/formium/formik/issues/2430
             },
             (err) => {
               setStatus({ success: false });
@@ -100,6 +101,7 @@ export default function AuthRegister() {
       {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
         <form noValidate onSubmit={handleSubmit}>
           <Grid container spacing={3}>
+            {/*
             <Grid item xs={12} md={6}>
               <Stack spacing={1}>
                 <InputLabel htmlFor="firstname-signup">First Name*</InputLabel>
@@ -143,27 +145,7 @@ export default function AuthRegister() {
                 </FormHelperText>
               )}
             </Grid>
-            <Grid item xs={12}>
-              <Stack spacing={1}>
-                <InputLabel htmlFor="company-signup">Company</InputLabel>
-                <OutlinedInput
-                  fullWidth
-                  error={Boolean(touched.company && errors.company)}
-                  id="company-signup"
-                  value={values.company}
-                  name="company"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  placeholder="Demo Inc."
-                  inputProps={{}}
-                />
-              </Stack>
-              {touched.company && errors.company && (
-                <FormHelperText error id="helper-text-company-signup">
-                  {errors.company}
-                </FormHelperText>
-              )}
-            </Grid>
+            */}
             <Grid item xs={12}>
               <Stack spacing={1}>
                 <InputLabel htmlFor="email-signup">Email Address*</InputLabel>
@@ -176,7 +158,7 @@ export default function AuthRegister() {
                   name="email"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  placeholder="demo@company.com"
+                  placeholder="example@davidastro.com"
                   inputProps={{}}
                 />
               </Stack>
