@@ -234,7 +234,7 @@ export default function ImagingFramingSimulator() {
                         </div>
                     </div>
 
-                    <Basic/>
+                    <Basic />
                 </CardContent>
             </Card>
         </Grid>

@@ -8,10 +8,6 @@ import BasicTable from './BasicTable';
 
 export default function Basic() {
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} lg={6}>
         <BasicTable />
-      </Grid>
-    </Grid>
   );
 }
