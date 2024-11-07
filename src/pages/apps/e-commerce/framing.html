@@ -1,0 +1,463 @@
+
+
+														<!-- Gear Information -->
+														<div class="card text-black-50 bg-auto border-dark mb-2">
+															<div class="card-body">
+
+																<div class="form-row" id="table_input">
+
+																	<div class="pr-0 pr-lg-3">
+
+																		<!-- Telescope/Lens -->
+																		<div class="row">
+																			<div class="col-5">
+																				<h5 class="text-warning mb-3">Telescope / Lens</h5>
+																			</div>
+																			<div class="col-md-7">
+																				<button class="form-control float-start btn btn-sm btn-warning text-dark font-weight-bold mb-3"
+																				        data-toggle="modal" data-target="#modal_telescopes"
+																				        style="font-size: 0.7rem;">Search Telescope/Lens
+																				</button>
+																			</div>
+																		</div>
+
+																		<!-- Aperture -->
+																		<div class="row">
+
+																			<div class="form-group col-5 align-self-center">
+																				<label class="mb-0" for="opt_aperture">Aperture (<abbr class="initialism"
+																				                                                       data-toggle="tooltip"
+																				                                                       data-placement="top"
+																				                                                       title=""
+																				                                                       data-original-title="Millimeters">mm</abbr>)</label>
+																			</div>
+
+																			<div class="form-group col-md-7">
+																				<input type="number" class="form-control input-number-text mb-3" id="opt_aperture"
+																				       min="30" max="2000" step="1" value="200" required="" lang="en">
+																				<div class="invalid-feedback">
+																					Allowed values: between 30 and 2000 mm
+																				</div>
+																			</div>
+
+																		</div>
+
+																		<!-- Focal Length -->
+																		<div class="row">
+
+																			<div class="form-group col-5 align-self-center">
+																				<label class="mb-0" for="opt_focal">Focal Length (<abbr class="initialism"
+																				                                                          data-toggle="tooltip"
+																				                                                          data-placement="top"
+																				                                                          title=""
+																				                                                          data-original-title="Millimeters">mm</abbr>)</label>
+																			</div>
+
+																			<div class="form-group col-md-7">
+																				<input type="number" class="form-control input-number-text mb-3" id="opt_focal"
+																				       min="10" max="10000" step="1" value="1000" required="" lang="en">
+																				<div class="invalid-feedback">
+																					Allowed values: between 10 and 10000 mm
+																				</div>
+																			</div>
+
+																		</div>
+
+																		<!-- Reducer/Barlow-->
+																		<div class="row">
+
+																			<div class="form-group col-5 align-self-center">
+																				<label class="mb-0" for="opt_reductor">Reducer / Barlow</label>
+																			</div>
+
+																			<div class="form-group col-md-7">
+																				<select class="form-select mb-3" id="opt_reductor">
+																					<option value="1" selected="">None</option>
+																					<option value="0.33">0.33x (reducer)</option>
+																					<option value="0.4">0.4x (reducer)</option>
+																					<option value="0.5">0.5x (reducer)</option>
+																					<option value="0.63">0.63x (reducer)</option>
+																					<option value="0.67">0.67x (reducer)</option>
+																					<option value="0.7">0.7x (reducer)</option>
+																					<option value="0.72">0.72x (reducer)</option>
+																					<option value="0.73">0.73x (reducer)</option>
+																					<option value="0.8">0.8x (reducer)</option>
+																					<option value="0.85">0.85x (reducer)</option>
+																					<option value="1.15">1.15x (Barlow)</option>
+																					<option value="1.5">1.5x (Barlow)</option>
+																					<option value="1.6">1.6x (Barlow)</option>
+																					<option value="2">2x (Barlow)</option>
+																					<option value="2.25">2.25x (Barlow)</option>
+																					<option value="2.5">2.5x (Barlow)</option>
+																					<option value="2.75">2.75x (Barlow)</option>
+																					<option value="3">3x (Barlow)</option>
+																					<option value="4">4x (Barlow)</option>
+																					<option value="4.2">4.2x (Barlow)</option>
+																					<option value="5">5x (Barlow)</option>
+																				</select>
+																			</div>
+
+																		</div>
+
+																	</div>
+
+																	<div class="pl-0 pl-lg-3">
+
+																		<!-- Camera -->
+																		<div class="row">
+																			<div class="col-5">
+																				<h5 class="text-warning mb-3">Camera</h5>
+																			</div>
+																			<div class="col-md-7">
+																				<button class="md-3 form-control float-start btn btn-sm btn-warning text-dark font-weight-bold mb-3"
+																				        data-toggle="modal" data-target="#modal_cameras"
+																				        style="font-size: 0.7rem;">Search Camera
+																				</button>
+																			</div>
+																		</div>
+
+																		<!-- Resolution -->
+																		<div class="row">
+
+																			<div class="form-group col-5 align-self-center mb-3">
+																				Resolution (<abbr class="initialism" data-toggle="tooltip" data-placement="top"
+																				                  title="" data-original-title="Pixels">px</abbr>)
+																			</div>
+
+																				<div class="form-group col-md-3 mb-3">
+																					<input type="number" class="form-control text-center input-number-text mb-3"
+																					       id="cam_resolution_x" min="100" max="50000" step="1" value="5184"
+																					       required="" lang="en">
+																					<div class="invalid-feedback">
+																						Allowed values: between 100 and 50000 px
+																					</div>
+																				</div>
+
+																				<div class="form-group d-md-block col-md-1 text-center align-self-center text-info mb-3">
+																					⨉
+																				</div>
+
+																				<div class="form-group col-md-3 mb-3">
+																					<input type="number" class="form-control text-center input-number-text mb-3"
+																					       id="cam_resolution_y" min="100" max="50000" step="1" value="3456"
+																					       required="" lang="en">
+																					<div class="invalid-feedback">
+																						Allowed values: between 100 and 50000 px
+																					</div>
+																				</div>
+
+																		</div>
+
+																		<!-- Pixel Size -->
+																		<div class="row">
+
+																			<div class="form-group col-5 align-self-center mb-3">
+																				Pixel Size (<abbr class="initialism" data-toggle="tooltip" data-placement="top"
+																				                  title="" data-original-title="Microns">μm</abbr>)
+																			</div>
+
+																			<div class="form-group col-md-3 mb-3">
+																				<input type="number" class="form-control text-center input-number-text mb-3"
+																				       id="cam_pixel_x" min="0.1" max="100" step="0.1" value="4.3" required=""
+																				       lang="en">
+																				<div class="invalid-feedback">
+																					Allowed values: between 0.1 and 100 μm
+																				</div>
+																			</div>
+
+																			<div class="form-group d-md-block col-md-1 text-center align-self-center text-info mb-3">
+																				⨉
+																			</div>
+
+																			<div class="form-group col-md-3 mb-3">
+																				<input type="number" class="form-control text-center input-number-text mb-3"
+																				       id="cam_pixel_y" min="0.1" max="100" step="0.1" value="4.3" required=""
+																				       lang="en">
+																				<div class="invalid-feedback">
+																					Allowed values: between 0.1 and 100 μm
+																				</div>
+																			</div>
+
+																		</div>
+
+																		<!-- Binning -->
+																		<div class="row">
+
+																			<div class="form-group col-5 align-self-center mb-3">
+																				<label class="mb-0" for="cam_binning">Binning</label>
+																			</div>
+
+																			<div class="form-group col-md-7 mb-3">
+																				<select class="form-select" id="cam_binning">
+																					<option value="1">1 ⨉ 1</option>
+																					<option value="2">2 ⨉ 2</option>
+																					<option value="3">3 ⨉ 3</option>
+																					<option value="4">4 ⨉ 4</option>
+																					<option value="5">5 ⨉ 5</option>
+																				</select>
+																			</div>
+
+																		</div>
+
+																	</div>
+
+																</div>
+
+																<div class="form-row mt-4">
+																	<button type="button" id="btn_calculate" class="form-control btn btn-blue">Update Equipment
+																	</button>
+																	<!--
+																	<button type="button" id="btnSave" class="btn btn-outline-info btn-block">Save Image
+																	</button>
+																	-->
+																	<!-- The code below generates the Framing Square around the target.-->
+																	<input type="radio" name="frame_line" value="frame_line_off" checked="" hidden>
+																</div>
+
+															</div>
+														</div>
+
+														<!-- Aladin -->
+														<div class="card text-black-50 bg-auto mb-2">
+															<div class="card-body p-2">
+																<div class="row">
+
+																	<div class="form-group col-md-2 align-self-center text-right mb-0">
+																		<label for="aladin_search" class="mb-0">Search</label>
+																	</div>
+
+																	<div class="form-group col-md-6 mb-0">
+																		<input type="search" class="form-control form-control-sm mb-3" id="aladin_search"
+																		       placeholder="Search (ID or RA Dec)">
+																	</div>
+
+																	<div class="form-group col mb-0">
+																		<div class="btn-group" role="group" aria-label="Herramientas">
+
+																			<button id="btn_adjust_fov" class="btn btn-sm"
+																			        title="Adjust FOV to camera frame size">
+																				<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+																				     class="bi bi-aspect-ratio" viewBox="0 0 16 16" height="22" width="22"
+																				     style="margin-top: -5px;">
+																					<path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h13A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5zM1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5z"></path>
+																					<path d="M2 4.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H3v2.5a.5.5 0 0 1-1 0zm12 7a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H13V8.5a.5.5 0 0 1 1 0z"></path>
+																				</svg>
+																			</button>
+
+																		</div>
+																	</div>
+																</div>
+																	<div class="row">
+																		<div class="form-group col-md-2 align-self-center text-right mb-0 mt-2 mt-md-0">
+																			<label for="aladin_survey" class="mb-0">Survey</label>
+																		</div>
+
+																		<div class="form-group col-md-6 mb-0">
+																			<select class="form-control form-control-sm" id="aladin_survey">
+																				<option value="P/DSS2/color">DSS2 Color</option>
+																				<option value="P/DSS2/blue">DSS2 Blue</option>
+																				<option value="CDS/P/DSS2/red">DSS2 Red</option>
+																				<option value="P/2MASS/color">2MASS Color</option>
+																				<option value="P/allWISE/color">allWISE Color</option>
+																			</select>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-12" id="aladin-container">
+																<div class="bg-auto" id="aladin-lite-div" data-mobile="0"
+																     style="width: 100%; height: 650px;"></div>
+															</div>
+														</div>
+
+														<!-- Below Table -->
+														<div class="row text-black-50 mt-3">
+															<div class="col-12 col-lg-6 order-2 order-lg-1">
+																<div class="card text-black-50 border-primary">
+																<div class="table-responsive">
+																	<table class="table bg-auto">
+																		<tbody>
+																		<tr>
+																			<td><b>Focal Ratio</b></td>
+																			<td class="text-right text-blue font-weight-bold"><span
+																					id="res_focalratio">-</span></td>
+																		</tr>
+																		<tr>
+																			<td><b>Effective Focal Length</b></td>
+																			<td class="text-right text-blue font-weight-bold"><span
+																					id="res_eff_focal">-</span></td>
+																		</tr>
+																		<tr>
+																			<td colspan="2">
+																				<b>Field of View (FOV)</b>
+																				<table class="table table-sm table-borderless mb-0">
+																					<tbody>
+																					<tr>
+																						<td class="text-black-50 text-left">Width x Height</td>
+																						<td class="text-blue font-weight-bold text-right"><span
+																								id="res_fov_d">-</span></td>
+																					</tr>
+																					<tr>
+																						<td class="text-black-50 text-left">Diagonal</td>
+																						<td class="text-blue font-weight-bold text-right"><span
+																								id="res_fov_diag">-</span></td>
+																					</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td><b>Resolution</b></td>
+																			<td class="text-right text-blue font-weight-bold"><span
+																					id="res_resolution">-</span></td>
+																		</tr>
+																		<tr>
+																			<td class="align-middle"><b>Dawes Resolution</b></td>
+																			<td class="text-right text-blue font-weight-bold">
+																				<span id="dawes_resolution">-</span>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td class="align-middle border-bottom-0"><b>Rayleigh Resolution</b></td>
+																			<td class="text-right text-blue font-weight-bold border-bottom-0">
+																				<span id="rayleigh_resolution">-</span>
+																			</td>
+																		</tr>
+																		</tbody>
+																	</table>
+																	</div>
+																</div>
+
+															</div>
+
+															<div class="col-12 col-lg-6 order-1 order-lg-2 mb-3 mb-lg-0">
+
+																<div class="card text-black-50 border-primary">
+																		<div class="card-body">
+																			<div class="form-row">
+																			<div class="form-group col">
+																				<label for="frame_rotation">Frame Rotation</label>
+																				<span id="frame_rotation_reset"
+																				      class="ml-2 badge bg-blue rounded-pill"
+																				      style="cursor: pointer;">Reset</span>
+																			</div>
+																			<div class="form-group col">
+																				<input type="range" class="form-range" id="frame_rotation" step="1"
+																				       min="-180" max="180" value="0" style="margin-top: 9px;">
+																			</div>
+																			<div class="form-group col">
+																				<input type="text" class="form-control-plaintext text-center"
+																				       id="frame_rotation_txt" value="0º" readonly="">
+																			</div>
+																				<div class="form-group col">
+																					<label>Frame Color</label>
+																					<input type="color" class="form-control mx-auto p-0" id="frame_color_line"
+																				       value="#abfb04" style="width: 26px; height: 26px; margin-top: 8px;">
+																			</div>
+																		</div>
+																		</div>
+																</div>
+
+															</div>
+
+
+														<!-- Modal Cameras-->
+															<div class="modal show" id="modal_cameras" tabindex="-1" aria-labelledby="Cameras" aria-hidden="true">
+																<div class="modal-dialog modal-dialog-scrollable modal-lg">
+																	<div class="modal-content">
+
+																		<div class="modal-header">
+																			<div class="container-fluid p-0">
+																				<div class="row">
+																					<div class="col-12 text-center">
+																						<h5 class="modal-title">Cameras</h5>
+																					</div>
+																					<div class="col-12 mt-3">
+																						<input type="search" class="form-control form-control-lg border-success"
+																						       id="filter_camera" placeholder="Search Camera" value=""
+																						       maxlength="20">
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+
+																		<div class="modal-body">
+																			<div class="row">
+																				<div class="col-12">
+																					<div class="table-responsive">
+																						<table class="table table-hover" id="modal_cameras_table">
+																							<thead>
+																							<tr>
+																								<th>Brand</th>
+																								<th class="text-right">Model</th>
+																								<th class="text-right">Pixel Size</th>
+																								<th class="text-right">Resolution</th>
+																							</tr>
+																							</thead>
+																							<tbody id="table-body-camera">
+
+																							</tbody>
+																						</table>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+
+														<!-- Modal Telescopes-->
+															<div class="modal show modal-lg" id="modal_telescopes" tabindex="-1" aria-labelledby="Telescopes"
+															     aria-hidden="true">
+																<div class="modal-dialog modal-dialog-scrollable">
+																	<div class="modal-content">
+
+																		<div class="modal-header">
+																			<div class="container-fluid p-0">
+																				<div class="row">
+																					<div class="col-12 text-center">
+																						<h5 class="modal-title">Telescope / Lens</h5>
+																					</div>
+																					<div class="col-12 mt-3">
+																						<input type="search" class="form-control form-control-lg border-success"
+																						       id="filter_telescopes" placeholder="Search Telescope/Lens" value=""
+																						       maxlength="20">
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="modal-body">
+																			<div class="row">
+																				<div class="col-12">
+																					<div class="table-responsive">
+																						<table style="width: auto; align-items: center;" class="table table-hover" id="modal_telescope_table">
+																							<thead class="thead-light">
+																							<tr>
+																								<th>Brand</th>
+																								<th scope="col">Model</th>
+																								<th scope="col">Aperture</th>
+																								<th scope="col">Focal Length</th>
+																							</tr>
+																							</thead>
+																							<tbody id="table-body-telescope">
+
+																							</tbody>
+																						</table>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+																		</div>
+
+																	</div>
+																</div>
+															</div>
+														</div>
+								

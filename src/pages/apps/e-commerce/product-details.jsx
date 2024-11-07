@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState, useMemo } from 'react';
 import { useParams, useLoaderData, Link } from 'react-router-dom';
+import React from 'react';
 
 // material-ui
 import Box from '@mui/material/Box';
@@ -22,7 +23,10 @@ import ProductFeatures from 'sections/apps/e-commerce/product-details/ProductFea
 import ProductInfo from 'sections/apps/e-commerce/product-details/ProductInfo';
 import ToolsList from 'sections/apps/e-commerce/products/ToolsList';
 import { useTheme } from '@mui/material/styles';
-import { Book } from 'iconsax-react';
+import { Book, Component, Cpu } from 'iconsax-react';
+import { Container } from '@mui/material';
+import ImagingFramingSimulator from './ImagingFramingSimulator';
+import VisualFramingSimulator from './VisualFramingSimulator';
 
 // ==============================|| TOOLS - TOOL DETAILS ||============================== //
 
@@ -37,10 +41,12 @@ export default function ProductDetails() {
 
   const filtered = ToolsList.filter(tool => tool.id.includes(id))
   const rightTool = filtered[0]
-  
+
+  const Component = rightTool.component
+
   return (
     <>
-        <Grid container spacing={2}>
+        <Container spacing={2}>
           <Stack item xs={12}>
             <Stack container spacing={2}>
               <Stack item xs={12} md={7} lg={8}>
@@ -81,23 +87,34 @@ export default function ProductDetails() {
                       <AccordionDetails>
                         <Stack spacing={2}>
                           <Typography>
-                            Content 1
+                            {rightTool.content1}
                           </Typography>
                           <Typography>
-                            Content 2  
+                            {rightTool.content2} 
                           </Typography>
                           <Typography>
-                            Content 3
+                            {rightTool.content3}
+                          </Typography>
+                          <Typography>
+                            {rightTool.content4}
+                          </Typography>
+                          <Typography>
+                            {rightTool.content5}
                           </Typography>
                         </Stack>
                       </AccordionDetails>
                     </Accordion>
+                    
                   </Box>
                 </Stack>
               </Stack>
             </MainCard>
+            <br />
+           <Component>
+              
+           </Component>
           </Stack>
-        </Grid>
+        </Container>
     </>
   );
 }
