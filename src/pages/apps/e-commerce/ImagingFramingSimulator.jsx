@@ -1,22 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box, Grid, Card, CardContent, Typography, Button, Tooltip, TextField, MenuItem,
-  Dialog, DialogTitle, DialogContent, DialogActions, InputLabel, FormControl, Select,
-} from '@mui/material';
+  Dialog, DialogTitle, DialogContent, DialogActions, InputLabel, FormControl, Select} from '@mui/material';
 import MainCard from 'components/MainCard';
+import '../../../dependencies/framing_simulator/aladin'
+import '../../../dependencies/framing_simulator/js_modal_camera'
+import '../../../dependencies/framing_simulator/js_modal_telescope'
+import '../../../dependencies/framing_simulator/calculator'
+
+import { useMemo, useState } from 'react';
+
+import Basic from './basic';
 
 export default function ImagingFramingSimulator() {
 
-
-
     const [openCameraModal, setOpenCameraModal] = useState(false);
-  const [openTelescopeModal, setOpenTelescopeModal] = useState(false);
+    const [openTelescopeModal, setOpenTelescopeModal] = useState(false);
 
-  const handleOpenCameraModal = () => setOpenCameraModal(true);
-  const handleCloseCameraModal = () => setOpenCameraModal(false);
+    const handleOpenCameraModal = () => setOpenCameraModal(true);
+    const handleCloseCameraModal = () => setOpenCameraModal(false);
 
-  const handleOpenTelescopeModal = () => setOpenTelescopeModal(true);
-  const handleCloseTelescopeModal = () => setOpenTelescopeModal(false);
+    const handleOpenTelescopeModal = () => setOpenTelescopeModal(true);
+    const handleCloseTelescopeModal = () => setOpenTelescopeModal(false);
+
+    const [ResolutionX, setResolutionX] = useState('')
+    const [ResolutionY, setResolutionY] = useState('')
+    const [PixelSizeX, setPixelSizeX] = useState('')
+    const [PixelSizeY, setPixelSizeY] = useState('')
+    const [Aperture, setAperture] = useState('')
+    const [FocalLength, setFocalLength] = useState('')
+
+
 
   return (
     <MainCard>
@@ -49,6 +63,7 @@ export default function ImagingFramingSimulator() {
                     defaultValue="200"
                     inputProps={{ min: 30, max: 2000 }}
                     fullWidth
+                    id="opt_aperture"
                   />
                 </Grid>
               </Grid>
@@ -64,6 +79,7 @@ export default function ImagingFramingSimulator() {
                     defaultValue="1000"
                     inputProps={{ min: 10, max: 10000 }}
                     fullWidth
+                    id="opt_focal"
                   />
                 </Grid>
               </Grid>
@@ -79,6 +95,7 @@ export default function ImagingFramingSimulator() {
                       <MenuItem value="0.33">0.33x (reducer)</MenuItem>
                       <MenuItem value="2">2x (Barlow)</MenuItem>
                       {/* Add other options as necessary */}
+                      
                     </Select>
                   </FormControl>
                 </Grid>
@@ -174,7 +191,7 @@ export default function ImagingFramingSimulator() {
             <Card variant="outlined">
                 <CardContent>
                     <Typography variant="h5" color="primary.main" gutterBottom>
-                        Target Options
+                        Options
                     </Typography>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={6}>
@@ -185,10 +202,12 @@ export default function ImagingFramingSimulator() {
                         <Grid item xs={12} md={6}>
                             <FormControl fullWidth>
                                 <InputLabel>Survey</InputLabel>
-                                <Select defaultValue="1">
-                                <MenuItem value="1">None</MenuItem>
-                                <MenuItem value="0.33">0.33x (reducer)</MenuItem>
-                                <MenuItem value="2">2x (Barlow)</MenuItem>
+                                <Select id="aladin_survey">
+                                <MenuItem value="P/DSS2/color">DSS2 Color</MenuItem>
+                                <MenuItem value="P/DSS2/blue">DSS2 Blue</MenuItem>
+                                <MenuItem value="CDS/P/DSS2/red">DSS2 Red</MenuItem>
+                                <MenuItem value="P/2MASS/color">2MASS Color</MenuItem>
+                                <MenuItem value="P/allWISE/color">allWISE Color</MenuItem>
                                 {/* Add other options as necessary */}
                                 </Select>
                             </FormControl>
@@ -197,6 +216,29 @@ export default function ImagingFramingSimulator() {
                 </CardContent>
             </Card>
         </Grid>
+
+        <br />
+
+        <Grid item xs={12} md={6}>
+            <Card variant="outlined">
+                <CardContent>
+                    <Typography variant="h5" color="primary.main" gutterBottom>
+                        Result
+                    </Typography>
+
+                    {/* Aladin Result here */}
+
+                    <div id="aladin-container">
+                        <div id="aladin-lite-div" sx={{width: "100%", height: "650px"}}>
+
+                        </div>
+                    </div>
+
+                    <Basic/>
+                </CardContent>
+            </Card>
+        </Grid>
+
 
       {/* Camera Modal */}
       <Dialog open={openCameraModal} onClose={handleCloseCameraModal}>
@@ -230,6 +272,8 @@ export default function ImagingFramingSimulator() {
             variant="outlined"
           />
           {/* Add table or telescope list here */}
+
+
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseTelescopeModal}>Close</Button>

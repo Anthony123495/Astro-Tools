@@ -66,7 +66,7 @@ export default function ProductCard({ id, title, brand, image, description }) {
       <Box sx={{ width: 250, m: 'auto' }}>
         <CardMedia
           sx={{ height: 250, textDecoration: 'none'}}
-          image={image && getImageUrl(`${image}`, ImagePath.ECOMMERCE)}
+          image={image || 'https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg'}
           component={Link}
           to={`/apps/tools/tool/${id}`}
         />

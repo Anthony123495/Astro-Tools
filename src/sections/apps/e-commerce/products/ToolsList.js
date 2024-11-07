@@ -19,7 +19,7 @@ const ToolsList = [
     },
     {
         id: 'visual-astronomy-assistant', //Slug
-        image: 'https://tools.davidastro.com/assets/img/astro/LDN1448.png',
+        image: '',
         title: 'Visual Astronomy Assistant',
         brand: 'David Astro',
         category: 'Visual',
@@ -32,7 +32,7 @@ const ToolsList = [
     },
     {
         id: 'forecast', //Slug
-        image: 'https://tools.davidastro.com/assets/img/astro/LDN1448.png',
+        image: '',
         title: 'ForeCast',
         brand: 'David Astro',
         category: 'ForeCast',

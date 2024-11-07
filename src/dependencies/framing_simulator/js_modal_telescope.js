@@ -63,8 +63,6 @@ async function getData() {
 
 //Modal Telescope Filter
 
-
-
 $(document).ready((function () {
     $("#modal_telescopes").on("shown.bs.modal", (function (event) {
         $("#filter_telescopes").focus()
