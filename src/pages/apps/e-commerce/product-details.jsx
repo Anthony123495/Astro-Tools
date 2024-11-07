@@ -81,13 +81,13 @@ export default function ProductDetails() {
                       <AccordionDetails>
                         <Stack spacing={2}>
                           <Typography>
-                            The David Astro Tools Astrophotography Framing Assistant is a powerful tool designed to help you precisely frame your celestial targets.
+                            Content 1
                           </Typography>
                           <Typography>
-                            By selecting your equipment from our extensive database (camera, telescope, focal reducer) or manually entering key details (focal length, pixel size, sensor size), you can visualize your composition in real-time with the help of the dynamic Aladin API navigator.
+                            Content 2  
                           </Typography>
                           <Typography>
-                            Additionally, the tool provides a comprehensive table of calculated values, including
+                            Content 3
                           </Typography>
                         </Stack>
                       </AccordionDetails>

@@ -7,7 +7,6 @@ import 'firebase/compat/auth';
 // action - state management
 import { LOGIN, LOGOUT } from 'contexts/auth-reducer/actions';
 import authReducer from 'contexts/auth-reducer/auth';
-
 // project-imports
 import Loader from 'components/Loader';
 

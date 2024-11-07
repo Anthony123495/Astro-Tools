@@ -43,9 +43,11 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && pr
   })
 }));
 
+
 // ==============================|| ECOMMERCE - PRODUCTS ||============================== //
 
 export default function ProductsPage() {
+  
   const theme = useTheme();
 
   const { container } = useConfig();
@@ -59,7 +61,7 @@ export default function ProductsPage() {
   const initialProducts = useLoaderData();
   const [products, setProducts] = useState(initialProducts);
 
-  const [openFilterDrawer, setOpenFilterDrawer] = useState(true);
+  const [openFilterDrawer, setOpenFilterDrawer] = useState(false);
   const handleDrawerOpen = () => {
     setOpenFilterDrawer((prevState) => !prevState);
   };

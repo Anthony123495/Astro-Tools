@@ -27,19 +27,6 @@ export default function ProductInfo({ tool }) {
         }}
       />
       </CustomTooltip>
-                  <Box
-                    component="img"
-                    sx={{
-                      height: 233,
-                      width: 350,
-                      maxHeight: { xs: 233, md: 167 },
-                      maxWidth: { xs: 350, md: 250 },
-                      boxShadow: 1,
-                      borderRadius: 2,
-                    }}
-                    alt={'Image of ' + tool.title}
-                    src={tool.image}
-                  />
     </Stack>
   );
 }
