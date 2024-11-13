@@ -1,23 +1,93 @@
-import { useEffect } from "react";
+import React, { useState, useEffect, useRef } from 'react';
+import A from 'aladin-lite';
 
-const Aladin = ({Survey}) => {
+const Aladin = ({
+  SearchTarget,
+  triggerUpdate,
+  aperture,
+  focalLength,
+  reducer,
+  resolutionX,
+  resolutionY,
+  pixelSizeX,
+  pixelSizeY,
+  binning,
+  Survey,
+}) => {
+  const aladinRef = useRef(null);
+  const aladinInstance = useRef(null); // Store the Aladin instance
 
-    var aladin, container_w, container_h, fov, size, frame_w_px, frame_h_px, frame_x, frame_y,
-    opt_focal_effective, res_fov_d_x, res_fov_d_y, res_fov_diag, frame_rotation, frame_color_line, frame_circle_color,
-    frame_line_color, frame_line_opacity, aux_camera_model = "";
-    targets = ["M 1", "M 17", "M 27", "M 51", "M 65", "M 78", "M 83", "M 104", "NGC 104", "NGC 253", "NGC 1399", "NGC 2070", "NGC 4755"],
-    target_select = targets[Math.floor(Math.random() * targets.length)];
+  const [labels, setLabels] = useState([]);
 
-    useEffect(() => {
-        let aladin = A.aladin('#aladin-lite-div', {survey: Survey, fov:60, showFullscreenControl: false, showLayersControl: false})
-        aladin.setFov(1)
-    }, [])
+  useEffect(() => {
+    // Initialize Aladin instance once
+    if (!aladinInstance.current) {
+      aladinInstance.current = A.aladin('#aladin-lite-div', {
+        survey: Survey,
+        fov: 3,  // Default FOV, adjusted later dynamically
+        target: SearchTarget,  // Object name or RA/Dec
+        showZoomControl: !0,
+        showFullscreenControl: !1,
+        showProjectionControl: !1,
+        showLayersControl: !1,
+      });
+    }
 
-    return (
-        <div id="aladin-container">
-            <div id='aladin-lite-div' style={{width: '100%', height: '1000px'}} />
-        </div>
-    )
-}
+    // Calculate FOV dimensions based on input parameters
+    const fovX = calculateFOV(focalLength, resolutionX, pixelSizeX);
+    const fovY = calculateFOV(focalLength, resolutionY, pixelSizeY);
 
-export default Aladin
+    // Add the FovBox for framing
+    const fovBox = A.graphicOverlay({ color: 'green', lineWidth: 2 });
+    aladinInstance.current.addOverlay(fovBox);
+
+    // Define the center based on the current target
+    const center = aladinInstance.current.getRaDec();
+
+    // Calculate the half dimensions of the FOV
+    const halfFovX = fovX / 2;
+    const halfFovY = fovY / 2;
+
+    // Define the corners of the rectangle based on the center and FOV
+    const raDecCorners = [
+      [center[0] - halfFovX, center[1] - halfFovY], // Bottom-left corner
+      [center[0] + halfFovX, center[1] - halfFovY], // Bottom-right corner
+      [center[0] + halfFovX, center[1] + halfFovY], // Top-right corner
+      [center[0] - halfFovX, center[1] + halfFovY], // Top-left corner
+    ];
+
+    // Add the rectangle as a polygon to the overlay (instead of polyline)
+    fovBox.add(A.polygon(raDecCorners, { color: 'green', lineWidth: 2 }));
+    aladinInstance.current.setFov(fovX+2)
+    aladinInstance.current.setImageSurvey(Survey)
+    aladinInstance.current.gotoObject(SearchTarget)
+    
+}, [
+    triggerUpdate,
+    SearchTarget,
+    Survey,
+    aperture,
+    focalLength,
+    reducer,
+    resolutionX,
+    resolutionY,
+    pixelSizeX,
+    pixelSizeY,
+    binning,
+  ]);
+
+  const calculateFOV = (focalLength, resolution, pixelSize) => {
+    // Sensor size (in mm) = Resolution * Pixel Size (in mm)
+    const sensorSize = resolution * pixelSize;
+
+    // Calculate the FOV (in degrees) = Sensor Size / Focal Length
+    const fov = (sensorSize / 1000) / focalLength;  // Focal length is usually in mm, so we divide sensor size by 1000 to convert mm to meters
+
+    // Return the FOV in degrees
+    return fov * (180 / Math.PI);  // Convert radians to degrees if needed
+  };
+
+  return <div id="aladin-lite-div" ref={aladinRef} style={{ width: '100%', height: '500px' }} />;
+};
+
+export default Aladin;

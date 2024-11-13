@@ -39,6 +39,7 @@
     "@tanstack/react-virtual": "^3.2.0",
     "@testing-library/react": "^14.2.2",
     "@vitejs/plugin-react": "^4.2.1",
+    "aladin-lite": "^3.6.0-beta",
     "amazon-cognito-identity-js": "^6.3.12",
     "apexcharts": "^3.48.0",
     "appwrite": "^14.0.1",

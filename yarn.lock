@@ -3701,6 +3701,11 @@ ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+aladin-lite@^3.6.0-beta:
+  version "3.6.0-beta"
+  resolved "https://registry.npmjs.org/aladin-lite/-/aladin-lite-3.6.0-beta.tgz"
+  integrity sha512-p55ted+mCYPkgVW3o6dM6FSlGx5NhF83rMXY93S7dZf5BYa7RWg9KteQIxXXgYYxWRjyEWWMmZe/tK7nN4WOXQ==
+
 amazon-cognito-identity-js@^6.3.12:
   version "6.3.12"
   resolved "https://registry.npmjs.org/amazon-cognito-identity-js/-/amazon-cognito-identity-js-6.3.12.tgz"
