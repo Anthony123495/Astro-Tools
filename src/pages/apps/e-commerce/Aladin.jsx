@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import A from 'aladin-lite';
+import { toPng } from "html-to-image";
 
 const Aladin = ({
   SearchTarget,
@@ -13,24 +14,36 @@ const Aladin = ({
   pixelSizeY,
   binning,
   Survey,
+  RA,
+  DEC,
+  setRA,
+  setDEC,
 }) => {
   const aladinRef = useRef(null);
   const aladinInstance = useRef(null); // Store the Aladin instance
 
   const [labels, setLabels] = useState([]);
 
+  const [userSearchTarget, setUserSearchTarget] = useState(SearchTarget); // Separate state for user search
+
   useEffect(() => {
     // Initialize Aladin instance once
     if (!aladinInstance.current) {
       aladinInstance.current = A.aladin('#aladin-lite-div', {
         survey: Survey,
-        fov: 3,  // Default FOV, adjusted later dynamically
-        target: SearchTarget,  // Object name or RA/Dec
-        showZoomControl: !0,
-        showFullscreenControl: !1,
-        showProjectionControl: !1,
-        showLayersControl: !1,
+        fov: 3,
+        target: userSearchTarget,
+        showZoomControl: true,
+        showFullscreenControl: false,
+        showProjectionControl: false,
+        showLayersControl: false,
       });
+    }
+
+    // Handle user search independently
+    if (SearchTarget !== userSearchTarget) {
+      setUserSearchTarget(SearchTarget); // Update user search state
+      aladinInstance.current.gotoObject(SearchTarget); // Center on the new search target
     }
 
     // Calculate FOV dimensions based on input parameters
@@ -60,7 +73,9 @@ const Aladin = ({
     fovBox.add(A.polygon(raDecCorners, { color: 'green', lineWidth: 2 }));
     aladinInstance.current.setFov(fovX+2)
     aladinInstance.current.setImageSurvey(Survey)
-    aladinInstance.current.gotoObject(SearchTarget)
+
+    DEC = setDEC(formatDEC(aladinInstance.current.getRaDec()[1]))
+    RA = setRA(formatRA(aladinInstance.current.getRaDec()[0]))
     
 }, [
     triggerUpdate,
@@ -74,8 +89,24 @@ const Aladin = ({
     pixelSizeX,
     pixelSizeY,
     binning,
+    RA,
+    DEC,
   ]);
 
+  // Screenshot function
+  const takeScreenshot = async () => {
+    const aladinDiv = document.getElementById("aladin-lite-div");
+    try {
+      const dataUrl = await toPng(aladinDiv);
+      const link = document.createElement("a");
+      link.download = "aladin-screenshot.png";
+      link.href = dataUrl;
+      link.click();
+    } catch (error) {
+      console.error("Error taking screenshot: ", error);
+    }
+  };
+  
   const calculateFOV = (focalLength, resolution, pixelSize) => {
     // Sensor size (in mm) = Resolution * Pixel Size (in mm)
     const sensorSize = resolution * pixelSize;
@@ -87,7 +118,31 @@ const Aladin = ({
     return fov * (180 / Math.PI);  // Convert radians to degrees if needed
   };
 
-  return <div id="aladin-lite-div" ref={aladinRef} style={{ width: '100%', height: '500px' }} />;
+  const formatDEC = (dec) => {
+    const sign = dec < 0 ? "-" : "+";
+    const absDec = Math.abs(dec);
+    const degrees = Math.floor(absDec);
+    const minutes = Math.floor((absDec - degrees) * 60);
+    const seconds = ((absDec - degrees - minutes / 60) * 3600).toFixed(2);
+    return `${sign}${degrees}° ${minutes}' ${seconds}"`;
+  };
+
+  const formatRA = (ra) => {
+    const totalSeconds = ra * 3600 / 15; // Convert RA (in hours) to seconds
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = (totalSeconds % 60).toFixed(2);
+    return `${hours}h ${minutes}m ${seconds}s`;
+  };
+
+  return (
+    <div>
+      <div id="aladin-lite-div" ref={aladinRef} style={{ width: '100%', height: '500px' }} />
+      <button onClick={takeScreenshot} style={{ display: "none" }} id="hidden-screenshot-button">
+          Take Screenshot
+      </button>
+    </div>
+  );
 };
 
 export default Aladin;

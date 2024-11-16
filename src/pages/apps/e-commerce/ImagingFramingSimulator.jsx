@@ -4,17 +4,23 @@ import {
   Dialog, DialogTitle, DialogContent, DialogActions, InputLabel, FormControl, Select,
   Chip} from '@mui/material';
 import MainCard from 'components/MainCard';
-import '../../../dependencies/framing_simulator/aladin'
-import '../../../dependencies/framing_simulator/js_modal_camera'
-import '../../../dependencies/framing_simulator/js_modal_telescope'
-import '../../../dependencies/framing_simulator/calculator'
+import Table from './Table';
 
 import { useMemo, useState } from 'react';
 
 import Basic from './basic';
 import Aladin from './Aladin';
 
+import Divider from '@mui/material/Divider';
+
 export default function ImagingFramingSimulator() {
+
+    const handleSaveImage = () => {
+      const screenshotButton = document.getElementById("hidden-screenshot-button");
+      if (screenshotButton) {
+        screenshotButton.click();
+      }
+    };
 
     const [openCameraModal, setOpenCameraModal] = useState(false);
     const [openTelescopeModal, setOpenTelescopeModal] = useState(false);
@@ -36,6 +42,10 @@ export default function ImagingFramingSimulator() {
     const [BarlowReducer, setBarlowReducer] = useState('1')
     const [SearchTarget, setSearchTarget] = useState('')
     const [triggerUpdate, setTriggerUpdate] = useState(false);
+
+
+    const [RA, setRA] = useState('')
+    const [DEC, setDEC] = useState('')
 
     const handleSearchTarget = (event) => {
       if (event.key === 'Enter') {
@@ -61,181 +71,143 @@ export default function ImagingFramingSimulator() {
         setSurvey(e.target.value)
     }
 
-    const handleChangeFocalLength = (e) => {
-      if (e.key === 'Enter') {
-        setFocalLength(e.target.value)
-      }
-    }
-
-    const handleChangeResolutionX = (e) => {
-      if (e.key === 'Enter') {
-        setResolutionX(e.target.value)
-      }
-    }
-
-    const handleChangeResolutionY = (e) => {
-      if (e.key === 'Enter') {
-        setResolutionY(e.target.value)
-      }
-    }
-
-    const handleChangeAperture = (e) => {
-        setAperture(e.target.value)
-    }
-
-    const handleChangePixelX = (e) => {
-        setPixelSizeX(e.target.value)
-    }
-
-    const handleChangePixelY = (e) => {
-        setPixelSizeY(e.target.value)
-    }
-
-    const handleChangeBinning = (e) => {
-        setBinning(e.target.value)
-    }
-
-    const handleChangeBarlowReducer = (e) => {
-        setBarlowReducer(e.target.value)
-    }
-
   return (
     <MainCard>
     <Box sx={{ padding: 2 }}>
       {/* Telescope and Camera Info */}
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
-          <Card variant="outlined">
-            <CardContent>
-                    <Typography variant="h5" color="warning.main" gutterBottom>
-                        Telescope / Lens
-                    </Typography>
-                    <Button
-                        variant="shadow"
-                        color="warning"
-                        onClick={handleOpenTelescopeModal}
-                        fullWidth
-                    >
-                        Search Telescope/Lens
-                    </Button>
-              <Grid container spacing={1} sx={{ marginTop: 2 }}>
-                <Grid item xs={5}>
-                  <Tooltip title="Millimeters" placement="top">
-                    <Typography>Aperture (mm)</Typography>
-                  </Tooltip>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Card variant="outlined">
+              <CardContent>
+                      <Typography variant="h5" color="warning.main" gutterBottom>
+                          Telescope / Lens
+                      </Typography>
+                      <Button
+                          variant="shadow"
+                          color="warning"
+                          onClick={handleOpenTelescopeModal}
+                          fullWidth
+                      >
+                          Search Telescope/Lens
+                      </Button>
+                <Grid container spacing={1} sx={{ marginTop: 2 }}>
+                  <Grid item xs={5}>
+                    <Tooltip title="Millimeters" placement="top">
+                      <Typography>Aperture (mm)</Typography>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={7}>
+                    <TextField
+                      type="number"
+                      defaultValue="200"
+                      inputProps={{ min: 30, max: 2000 }}
+                      fullWidth
+                      id="opt_aperture"
+                    />
+                  </Grid>
                 </Grid>
-                <Grid item xs={7}>
-                  <TextField
-                    type="number"
-                    defaultValue="200"
-                    inputProps={{ min: 30, max: 2000 }}
-                    fullWidth
-                    id="opt_aperture"
-                  />
+                <Grid container spacing={1} sx={{ marginTop: 2 }}>
+                  <Grid item xs={5}>
+                    <Tooltip title="Millimeters" placement="top">
+                      <Typography>Focal Length (mm)</Typography>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={7}>
+                    <TextField
+                      type="number"
+                      defaultValue="1000"
+                      inputProps={{ min: 10, max: 10000 }}
+                      fullWidth
+                      id="opt_focal"
+                    />
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Grid container spacing={1} sx={{ marginTop: 2 }}>
-                <Grid item xs={5}>
-                  <Tooltip title="Millimeters" placement="top">
-                    <Typography>Focal Length (mm)</Typography>
-                  </Tooltip>
+                <Grid container spacing={1} sx={{ marginTop: 2 }}>
+                  <Grid item xs={5}>
+                    <Typography>Reducer / Barlow</Typography>
+                  </Grid>
+                  <Grid item xs={7}>
+                    <FormControl fullWidth>
+                      <InputLabel>Reducer / Barlow</InputLabel>
+                      <Select defaultValue="1" id="opt_reductor">
+                        <MenuItem value="1">None</MenuItem>
+                        <MenuItem value="0.33">0.33x (reducer)</MenuItem>
+                        <MenuItem value="2">2x (Barlow)</MenuItem>
+                        {/* Add other options as necessary */}
+                      </Select>
+                    </FormControl>
+                  </Grid>
                 </Grid>
-                <Grid item xs={7}>
-                  <TextField
-                    type="number"
-                    defaultValue="1000"
-                    inputProps={{ min: 10, max: 10000 }}
-                    fullWidth
-                    id="opt_focal"
-                  />
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card variant="outlined">
+              <CardContent>
+                <Typography variant="h5" color="warning.main" gutterBottom>
+                  Camera
+                </Typography>
+                <Button
+                  variant="shadow"
+                  color="warning"
+                  onClick={handleOpenCameraModal}
+                  fullWidth
+                >
+                  Search Camera
+                </Button>
+                <Grid container spacing={1} sx={{ marginTop: 2 }}>
+                  <Grid item xs={5}>
+                    <Tooltip title="Pixels" placement="top">
+                      <Typography>Resolution (px)</Typography>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <TextField id="cam_resolution_x" type="number" defaultValue="5184" inputProps={{ min: 100, max: 50000 }} fullWidth />
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Typography>⨉</Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <TextField id="cam_resolution_y" type="number" defaultValue="3456" inputProps={{ min: 100, max: 50000 }} fullWidth />
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Grid container spacing={1} sx={{ marginTop: 2 }}>
-                <Grid item xs={5}>
-                  <Typography>Reducer / Barlow</Typography>
+                <Grid container spacing={1} sx={{ marginTop: 2 }}>
+                  <Grid item xs={5}>
+                    <Tooltip title="Pixels" placement="top">
+                      <Typography>Pixel Size (px)</Typography>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <TextField id="cam_pixel_x" type="number" defaultValue="4.3" inputProps={{ step: 0.1, min: 0.1, max: 100 }} fullWidth />
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Typography>⨉</Typography>
+                  </Grid>
+                  <Grid item xs={3}>
+                    <TextField id="cam_pixel_y" type="number" defaultValue="4.3" inputProps={{ step: 0.1, min: 0.1, max: 100 }} fullWidth />
+                  </Grid>
                 </Grid>
-                <Grid item xs={7}>
-                  <FormControl fullWidth>
-                    <InputLabel>Reducer / Barlow</InputLabel>
-                    <Select defaultValue="1" id="opt_reductor">
-                      <MenuItem value="1">None</MenuItem>
-                      <MenuItem value="0.33">0.33x (reducer)</MenuItem>
-                      <MenuItem value="2">2x (Barlow)</MenuItem>
-                      {/* Add other options as necessary */}
-                    </Select>
-                  </FormControl>
+                <Grid container spacing={1} sx={{ marginTop: 2 }}>
+                  <Grid item xs={5}>
+                    <Typography>Binning</Typography>
+                  </Grid>
+                  <Grid item xs={7}>
+                    <FormControl fullWidth>
+                      <InputLabel>Binning</InputLabel>
+                      <Select id="cam_binning" defaultValue="1">
+                        <MenuItem value="1">1 ⨉ 1</MenuItem>
+                        <MenuItem value="2">2 ⨉ 2</MenuItem>
+                        <MenuItem value="3">3 ⨉ 3</MenuItem>
+                        <MenuItem value="4">4 ⨉ 4</MenuItem>
+                        <MenuItem value="5">5 ⨉ 5</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Card variant="outlined">
-            <CardContent>
-              <Typography variant="h5" color="warning.main" gutterBottom>
-                Camera
-              </Typography>
-              <Button
-                variant="shadow"
-                color="warning"
-                onClick={handleOpenCameraModal}
-                fullWidth
-              >
-                Search Camera
-              </Button>
-              <Grid container spacing={1} sx={{ marginTop: 2 }}>
-                <Grid item xs={5}>
-                  <Tooltip title="Pixels" placement="top">
-                    <Typography>Resolution (px)</Typography>
-                  </Tooltip>
-                </Grid>
-                <Grid item xs={3}>
-                  <TextField id="cam_resolution_x" type="number" defaultValue="5184" inputProps={{ min: 100, max: 50000 }} fullWidth />
-                </Grid>
-                <Grid item xs={1}>
-                  <Typography>⨉</Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <TextField id="cam_resolution_y" type="number" defaultValue="3456" inputProps={{ min: 100, max: 50000 }} fullWidth />
-                </Grid>
-              </Grid>
-              <Grid container spacing={1} sx={{ marginTop: 2 }}>
-                <Grid item xs={5}>
-                  <Tooltip title="Pixels" placement="top">
-                    <Typography>Pixel Size (px)</Typography>
-                  </Tooltip>
-                </Grid>
-                <Grid item xs={3}>
-                  <TextField id="cam_pixel_x" type="number" defaultValue="4.3" inputProps={{ min: 0.1, max: 100 }} fullWidth />
-                </Grid>
-                <Grid item xs={1}>
-                  <Typography>⨉</Typography>
-                </Grid>
-                <Grid item xs={3}>
-                  <TextField id="cam_pixel_y" type="number" defaultValue="4.3" inputProps={{ min: 0.1, max: 100}} step="0.1" fullWidth />
-                </Grid>
-              </Grid>
-              <Grid container spacing={1} sx={{ marginTop: 2 }}>
-                <Grid item xs={5}>
-                  <Typography>Binning</Typography>
-                </Grid>
-                <Grid item xs={7}>
-                  <FormControl fullWidth>
-                    <InputLabel>Binning</InputLabel>
-                    <Select id="cam_binning" defaultValue="1">
-                      <MenuItem value="1">1 ⨉ 1</MenuItem>
-                      <MenuItem value="2">2 ⨉ 2</MenuItem>
-                      <MenuItem value="3">3 ⨉ 3</MenuItem>
-                      <MenuItem value="4">4 ⨉ 4</MenuItem>
-                      <MenuItem value="5">5 ⨉ 5</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
         <br />
         <Grid item xs={12} md={6}>
             <Card variant="outlined">
@@ -259,9 +231,7 @@ export default function ImagingFramingSimulator() {
                 </CardContent>
             </Card>
         </Grid>
-
         <br />
-
         <Grid item xs={12} md={6}>
             <Card variant="outlined">
                 <CardContent>
@@ -277,6 +247,11 @@ export default function ImagingFramingSimulator() {
                                 id="btn_adjust_fov"                     
                                 title='Adjust FOV to camera frame size'
                             />
+                            <Typography variant="h6" color="" gutterBottom>
+                                Declination (DEC) of <b>{DEC}</b>
+                                <br />
+                                Right Ascension (RA) of <b>{RA}</b>
+                            </Typography>
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <FormControl fullWidth>
@@ -294,9 +269,7 @@ export default function ImagingFramingSimulator() {
                 </CardContent>
             </Card>
         </Grid>
-
         <br />
-
         <Grid item xs={12} md={6}>
             <Card variant="outlined">
                 <CardContent>
@@ -306,12 +279,24 @@ export default function ImagingFramingSimulator() {
 
                     {/* Aladin Result here */}
 
-                    <Aladin Survey={Survey} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning} />
+                    <Aladin setDEC={setDEC} setRA={setRA} DEC={DEC} RA={RA} Survey={Survey} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning} />
+                    <br />
+                    <Button 
+                      variant="shadow"
+                      color="primary"
+                      fullWidth
+                      onClick={handleSaveImage}
+                    >
+                      Save Image!
+                    </Button>
 
                     {/*<Basic />*/}
                 </CardContent>
             </Card>
-            <Card>
+        </Grid>
+        <br />
+        <Grid item xs={12} md={6}>
+            <Card variant="outlined">
                 <CardContent>
                     <Typography variant="h5" color="primary.main" gutterBottom>
                         Frame Rotation
@@ -327,8 +312,8 @@ export default function ImagingFramingSimulator() {
                 </CardContent>
             </Card>
         </Grid>
-
-
+        <br />
+        <Table reducer={BarlowReducer} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning}/>
       {/* Camera Modal */}
       <Dialog open={openCameraModal} onClose={handleCloseCameraModal}>
         <DialogTitle>Camera</DialogTitle>
@@ -347,7 +332,6 @@ export default function ImagingFramingSimulator() {
           <Button onClick={handleCloseCameraModal}>Close</Button>
         </DialogActions>
       </Dialog>
-
       {/* Telescope Modal */}
       <Dialog open={openTelescopeModal} onClose={handleCloseTelescopeModal}>
         <DialogTitle>Telescope / Lens</DialogTitle>
