@@ -90,7 +90,7 @@ const Table = ({
                         <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>
                             <Typography variant="body1" color="text.primary">
-                            Focal Ratio
+                            <b>Focal Ratio</b>
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -107,7 +107,7 @@ const Table = ({
                         <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>
                             <Typography variant="body1" color="text.primary">
-                            Effective Focal Length
+                            <b>Effective Focal Length</b>
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -124,14 +124,14 @@ const Table = ({
                         <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>
                             <Typography variant="body1" color="text.primary">
-                            Field of View (FOV)
+                            <b>Field of View (FOV)</b>
                             </Typography>
                         </Grid>
                         </Grid>
                         <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>
                             <Typography variant="body2" color="text.secondary" sx={{ ml: 2 }}>
-                            Width x Height
+                            <b>Width x Height</b>
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -143,7 +143,7 @@ const Table = ({
                         <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>
                             <Typography variant="body2" color="text.secondary" sx={{ ml: 2 }}>
-                            Diagonal
+                            <b>Diagonal</b>
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -160,7 +160,7 @@ const Table = ({
                         <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>
                             <Typography variant="body1" color="text.primary">
-                            Resolution
+                            <b>Resolution</b>
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -177,7 +177,7 @@ const Table = ({
                         <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>
                             <Typography variant="body1" color="text.primary">
-                            Dawes Resolution
+                            <b>Dawes Resolution</b>
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -194,7 +194,7 @@ const Table = ({
                         <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item>
                             <Typography variant="body1" color="text.primary">
-                            Rayleigh Resolution
+                            <b>Rayleigh Resolution</b>
                             </Typography>
                         </Grid>
                         <Grid item>

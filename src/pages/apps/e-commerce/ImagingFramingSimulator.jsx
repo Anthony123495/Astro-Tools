@@ -8,7 +8,6 @@ import Table from './Table';
 
 import { useMemo, useState } from 'react';
 
-import Basic from './basic';
 import Aladin from './Aladin';
 
 import Divider from '@mui/material/Divider';
