@@ -1,6 +1,5 @@
 //TODO: Add the modals : Search Telescope & Search Camera
 //TODO: Add the frame Rotation
-//TODO: Add more reducers and barlows in the dropdowns
 //TODO: Add labels below each green boxes
 
 import React from 'react';
@@ -141,9 +140,31 @@ export default function ImagingFramingSimulator() {
                       <InputLabel>Reducer / Barlow</InputLabel>
                       <Select defaultValue="1" id="opt_reductor" onChange={handleBarlowReducer} value={BarlowReducer}>
                         <MenuItem value="1" selected>None</MenuItem>
+
+                        {/* Reducers */}
                         <MenuItem value="0.33">0.33x (reducer)</MenuItem>
+                        <MenuItem value="0.4">0.4x (reducer)</MenuItem>
+                        <MenuItem value="0.5">0.5x (reducer)</MenuItem>
+                        <MenuItem value="0.63">0.63x (reducer)</MenuItem>
+                        <MenuItem value="0.67">0.67x (reducer)</MenuItem>
+                        <MenuItem value="0.7">0.7x (reducer)</MenuItem>
+                        <MenuItem value="0.72">0.72x (reducer)</MenuItem>
+                        <MenuItem value="0.73">0.73x (reducer)</MenuItem>
+                        <MenuItem value="0.8">0.8x (reducer)</MenuItem>
+                        <MenuItem value="0.85">0.85x (reducer)</MenuItem>
+
+                        {/* Barlows */}
+                        <MenuItem value="1.15">1.15x (Barlow)</MenuItem>
+                        <MenuItem value="1.5">1.5x (Barlow)</MenuItem>
+                        <MenuItem value="1.6">1.6x (Barlow)</MenuItem>
                         <MenuItem value="2">2x (Barlow)</MenuItem>
-                        {/* Add other options as necessary */}
+                        <MenuItem value="2.25">2.25x (Barlow)</MenuItem>
+                        <MenuItem value="2.5">2.5x (Barlow)</MenuItem>
+                        <MenuItem value="2.75">2.75x (Barlow)</MenuItem>
+                        <MenuItem value="3">3x (Barlow)</MenuItem>
+                        <MenuItem value="4">4x (Barlow)</MenuItem>
+                        <MenuItem value="4.2">4.2x (Barlow)</MenuItem>
+                        <MenuItem value="5">5x (Barlow)</MenuItem>
                       </Select>
                     </FormControl>
                   </Grid>
