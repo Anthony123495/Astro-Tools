@@ -22,8 +22,9 @@ const Aladin = ({
 }) => {
   const aladinRef = useRef(null);
   const aladinInstance = useRef(null); // Store the Aladin instance
+  const overlayRef = useRef(null); // Graphic overlay for all boxes
 
-  const [userSearchTarget, setUserSearchTarget] = useState(SearchTarget); // Separate state for user search
+  const [fovBoxes, setFovBoxes] = useState([]);
 
   useEffect(() => {
     // Initialize Aladin instance once
@@ -31,27 +32,35 @@ const Aladin = ({
       aladinInstance.current = A.aladin('#aladin-lite-div', {
         survey: Survey,
         fov: 3,
-        target: userSearchTarget,
+        target: SearchTarget,
         showZoomControl: true,
         showFullscreenControl: false,
         showProjectionControl: false,
         showLayersControl: false,
       });
+
+      // Add a graphic overlay for drawing boxes
+      overlayRef.current = A.graphicOverlay();
+      aladinInstance.current.addOverlay(overlayRef.current);
     }
 
-    // Handle user search independently
-    if (SearchTarget !== userSearchTarget) {
-      setUserSearchTarget(SearchTarget); // Update user search state
-      aladinInstance.current.gotoObject(SearchTarget); // Center on the new search target
+    // Update the survey when Survey prop changes
+    aladinInstance.current.setImageSurvey(Survey);
+
+    if (SearchTarget) {
+      aladinInstance.current.gotoObject(SearchTarget);
     }
+  }, [SearchTarget, Survey]);
+  
+
+  useEffect(() => {
+    if (triggerUpdate) {
+
+    console.log("triggerUpdate received:", triggerUpdate);
 
     // Calculate FOV dimensions based on input parameters
     const fovX = calculateFOV(focalLength, resolutionX, pixelSizeX, reducer);
     const fovY = calculateFOV(focalLength, resolutionY, pixelSizeY, reducer);
-
-    // Add the FovBox for framing
-    const fovBox = A.graphicOverlay({ color: color, lineWidth: 2 });
-    aladinInstance.current.addOverlay(fovBox);
 
     // Define the center based on the current target
     const center = aladinInstance.current.getRaDec();
@@ -68,30 +77,36 @@ const Aladin = ({
       [center[0] - halfFovX, center[1] + halfFovY], // Top-left corner
     ];
 
-    // Add the rectangle as a polygon to the overlay (instead of polyline)
-    fovBox.add(A.polygon(raDecCorners, { color: color, lineWidth: 2 }));
-    aladinInstance.current.setFov(fovX+2)
-    aladinInstance.current.setImageSurvey(Survey)
+    const newBox = {
+      raDecCorners,
+      center,
+    };
+    setFovBoxes((prevBoxes) => [...prevBoxes, newBox]) // Add the box to state
+  
+     // Adjust Aladin's zoom and re-center the view
+     aladinInstance.current.gotoRaDec(center[0], center[1]); // Center on the box
 
-    DEC = setDEC(formatDEC(aladinInstance.current.getRaDec()[1]))
-    RA = setRA(formatRA(aladinInstance.current.getRaDec()[0]))
-    
-}, [
-    triggerUpdate,
-    SearchTarget,
-    Survey,
-    aperture,
-    focalLength,
-    reducer,
-    resolutionX,
-    resolutionY,
-    pixelSizeX,
-    pixelSizeY,
-    binning,
-    RA,
-    DEC,
-    color
-  ]);
+     // Adjust the FoV to fit the box within the Aladin viewport
+     const paddingFactor = 2; // Add a small padding around the box
+     const maxFov = Math.max(fovX, fovY) * paddingFactor; // Scale FOV to fit the box
+     aladinInstance.current.setFoV(maxFov); // Set the adjusted FOV
+
+     DEC = setDEC(formatDEC(aladinInstance.current.getRaDec()[1]))
+     RA = setRA(formatRA(aladinInstance.current.getRaDec()[0]))
+  }
+}, [triggerUpdate]);
+
+  useEffect(() => {
+    if (overlayRef.current) {
+      // Clear all existing elements
+      overlayRef.current.removeAll();
+
+      // Redraw all FOV boxes with the current color
+      fovBoxes.forEach((box) => {
+        overlayRef.current.add(A.polygon(box.raDecCorners, { color, lineWidth: 2 }));
+      });
+    }
+  }, [fovBoxes, color]);
 
   // Screenshot function
   const takeScreenshot = async () => {

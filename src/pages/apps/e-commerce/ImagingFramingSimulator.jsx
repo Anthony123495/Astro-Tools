@@ -59,11 +59,12 @@ export default function ImagingFramingSimulator() {
     }
 
     const handleUpdateEquipment = (e) => {
-        setTriggerUpdate(prev => !prev);
+        setTriggerUpdate(true);
+        setTimeout(() => {
+          setTriggerUpdate(false);
+        }, 100); // Delay in milliseconds (adjust as needed)
         setFocalLength(document.getElementById('opt_focal').value)
         setAperture(document.getElementById('opt_aperture').value)
-        //setSearchTarget(document.getElementById('aladin_search').value)
-        //setSurvey(document.getElementById('aladin_survey').value)
         setResolutionX(document.getElementById('cam_resolution_x').value)
         setResolutionY(document.getElementById('cam_resolution_y').value)
         setPixelSizeX(document.getElementById('cam_pixel_x').value)
