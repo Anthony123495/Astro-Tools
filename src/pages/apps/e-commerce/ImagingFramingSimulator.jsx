@@ -6,11 +6,9 @@ import {
 import MainCard from 'components/MainCard';
 import Table from './Table';
 
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import Aladin from './Aladin';
-
-import Divider from '@mui/material/Divider';
 
 export default function ImagingFramingSimulator() {
 
@@ -41,7 +39,7 @@ export default function ImagingFramingSimulator() {
     const [BarlowReducer, setBarlowReducer] = useState('1')
     const [SearchTarget, setSearchTarget] = useState('')
     const [triggerUpdate, setTriggerUpdate] = useState(false);
-
+    const [ReducerBarlow, setReducerBarlow] = useState('')
 
     const [RA, setRA] = useState('')
     const [DEC, setDEC] = useState('')
@@ -56,7 +54,6 @@ export default function ImagingFramingSimulator() {
         setTriggerUpdate(prev => !prev);
         setFocalLength(document.getElementById('opt_focal').value)
         setAperture(document.getElementById('opt_aperture').value)
-        setBarlowReducer(document.getElementById('opt_reductor').value)
         //setSearchTarget(document.getElementById('aladin_search').value)
         //setSurvey(document.getElementById('aladin_survey').value)
         setResolutionX(document.getElementById('cam_resolution_x').value)
@@ -64,7 +61,12 @@ export default function ImagingFramingSimulator() {
         setPixelSizeX(document.getElementById('cam_pixel_x').value)
         setPixelSizeY(document.getElementById('cam_pixel_y').value)
         setBinning(document.getElementById('cam_binning').value)
+        setReducerBarlow(BarlowReducer)
     };
+
+    const handleBarlowReducer = (e) => {
+      setBarlowReducer(e.target.value)
+    }
 
     const handleChangeSurvey = (e) => {
         setSurvey(e.target.value)
@@ -128,8 +130,8 @@ export default function ImagingFramingSimulator() {
                   <Grid item xs={7}>
                     <FormControl fullWidth>
                       <InputLabel>Reducer / Barlow</InputLabel>
-                      <Select defaultValue="1" id="opt_reductor">
-                        <MenuItem value="1">None</MenuItem>
+                      <Select defaultValue="1" id="opt_reductor" onChange={handleBarlowReducer} value={BarlowReducer}>
+                        <MenuItem value="1" selected>None</MenuItem>
                         <MenuItem value="0.33">0.33x (reducer)</MenuItem>
                         <MenuItem value="2">2x (Barlow)</MenuItem>
                         {/* Add other options as necessary */}
@@ -278,7 +280,7 @@ export default function ImagingFramingSimulator() {
 
                     {/* Aladin Result here */}
 
-                    <Aladin setDEC={setDEC} setRA={setRA} DEC={DEC} RA={RA} Survey={Survey} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning} />
+                    <Aladin setDEC={setDEC} setRA={setRA} DEC={DEC} RA={RA} reducer={ReducerBarlow} Survey={Survey} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning} />
                     <br />
                     <Button 
                       variant="shadow"
@@ -312,7 +314,7 @@ export default function ImagingFramingSimulator() {
             </Card>
         </Grid>
         <br />
-        <Table reducer={BarlowReducer} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning}/>
+        <Table reducer={ReducerBarlow} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning}/>
       {/* Camera Modal */}
       <Dialog open={openCameraModal} onClose={handleCloseCameraModal}>
         <DialogTitle>Camera</DialogTitle>

@@ -47,8 +47,8 @@ const Aladin = ({
     }
 
     // Calculate FOV dimensions based on input parameters
-    const fovX = calculateFOV(focalLength, resolutionX, pixelSizeX);
-    const fovY = calculateFOV(focalLength, resolutionY, pixelSizeY);
+    const fovX = calculateFOV(focalLength, resolutionX, pixelSizeX, reducer);
+    const fovY = calculateFOV(focalLength, resolutionY, pixelSizeY, reducer);
 
     // Add the FovBox for framing
     const fovBox = A.graphicOverlay({ color: 'green', lineWidth: 2 });
@@ -107,12 +107,15 @@ const Aladin = ({
     }
   };
   
-  const calculateFOV = (focalLength, resolution, pixelSize) => {
+  const calculateFOV = (focalLength, resolution, pixelSize, reducer) => {
+    // Apply the reducer to calculate the effective focal length
+    const effectiveFocalLength = focalLength * reducer;
+    
     // Sensor size (in mm) = Resolution * Pixel Size (in mm)
     const sensorSize = resolution * pixelSize;
 
     // Calculate the FOV (in degrees) = Sensor Size / Focal Length
-    const fov = (sensorSize / 1000) / focalLength;  // Focal length is usually in mm, so we divide sensor size by 1000 to convert mm to meters
+    const fov = (sensorSize / 1000) / effectiveFocalLength;  // Focal length is usually in mm, so we divide sensor size by 1000 to convert mm to meters
 
     // Return the FOV in degrees
     return fov * (180 / Math.PI);  // Convert radians to degrees if needed
