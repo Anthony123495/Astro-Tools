@@ -18,11 +18,10 @@ const Aladin = ({
   DEC,
   setRA,
   setDEC,
+  color,
 }) => {
   const aladinRef = useRef(null);
   const aladinInstance = useRef(null); // Store the Aladin instance
-
-  const [labels, setLabels] = useState([]);
 
   const [userSearchTarget, setUserSearchTarget] = useState(SearchTarget); // Separate state for user search
 
@@ -51,7 +50,7 @@ const Aladin = ({
     const fovY = calculateFOV(focalLength, resolutionY, pixelSizeY, reducer);
 
     // Add the FovBox for framing
-    const fovBox = A.graphicOverlay({ color: 'green', lineWidth: 2 });
+    const fovBox = A.graphicOverlay({ color: color, lineWidth: 2 });
     aladinInstance.current.addOverlay(fovBox);
 
     // Define the center based on the current target
@@ -70,7 +69,7 @@ const Aladin = ({
     ];
 
     // Add the rectangle as a polygon to the overlay (instead of polyline)
-    fovBox.add(A.polygon(raDecCorners, { color: 'green', lineWidth: 2 }));
+    fovBox.add(A.polygon(raDecCorners, { color: color, lineWidth: 2 }));
     aladinInstance.current.setFov(fovX+2)
     aladinInstance.current.setImageSurvey(Survey)
 
@@ -91,6 +90,7 @@ const Aladin = ({
     binning,
     RA,
     DEC,
+    color
   ]);
 
   // Screenshot function

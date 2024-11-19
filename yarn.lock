@@ -1169,7 +1169,7 @@
   resolved "https://registry.npmjs.org/@babel/regjsgen/-/regjsgen-0.8.0.tgz"
   integrity sha512-x/rqGMdzj+fWZvCOYForTghzbtqPDZ5gPwaoNGHdgDfF2QA/XZbCBp4Moo5scrkAMPhB7z26XM/AaHuIJdgauA==
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.8", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.13", "@babel/runtime@^7.21.0", "@babel/runtime@^7.23.2", "@babel/runtime@^7.23.8", "@babel/runtime@^7.23.9", "@babel/runtime@^7.24.1", "@babel/runtime@^7.25.0", "@babel/runtime@^7.25.6", "@babel/runtime@^7.3.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.12.1", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.8", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.13", "@babel/runtime@^7.21.0", "@babel/runtime@^7.23.2", "@babel/runtime@^7.23.8", "@babel/runtime@^7.23.9", "@babel/runtime@^7.24.1", "@babel/runtime@^7.25.0", "@babel/runtime@^7.25.6", "@babel/runtime@^7.3.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2", "@babel/runtime@>=7.19.0":
   version "7.25.6"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.25.6.tgz"
   integrity sha512-VBj9MYyDb9tuLq7yzqjgzt6Q+IBQLrGZfdjOekyEirZPHxXWoTSGUTMrpsfi58Up73d13NfYLv8HT9vmznjzhQ==
@@ -3640,6 +3640,207 @@
     "@typescript-eslint/types" "5.62.0"
     eslint-visitor-keys "^3.3.0"
 
+"@uiw/color-convert@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/color-convert/-/color-convert-2.3.2.tgz"
+  integrity sha512-Txs0oAcOGhvM15yi7NqDJSws6htpuGx75EblFlZmh4h4AyUYXaeN2HNcOAUt835M3SN1j7rqMC+XERIE4r776Q==
+
+"@uiw/react-color-alpha@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-alpha/-/react-color-alpha-2.3.2.tgz"
+  integrity sha512-+yh+KEpNKjxNFFODQrB3Lki2hu6kznoSCngHgptlWBUtAC3e/e7tIiTTedSpCGr7fwIpC0CWrKwxENA3tyY/2Q==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-drag-event-interactive" "2.3.2"
+
+"@uiw/react-color-block@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-block/-/react-color-block-2.3.2.tgz"
+  integrity sha512-eic08WG6IFBEWrsE/U9aMuZxW9gSdX4s5iD5TyZMlHlUiGIneGXEOOSHNqlIfA7Dxbs1STYQbEQU/aSx6APYLw==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-editable-input" "2.3.2"
+    "@uiw/react-color-swatch" "2.3.2"
+
+"@uiw/react-color-chrome@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-chrome/-/react-color-chrome-2.3.2.tgz"
+  integrity sha512-WvA8dg2y+vgoyy8GFBM3B1+SeJ29ov5OVEei1kACMKxThADPdI4w3RRmhYIMnSeFGVW3bGuBMq6JimjIKZirCQ==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-alpha" "2.3.2"
+    "@uiw/react-color-editable-input" "2.3.2"
+    "@uiw/react-color-editable-input-hsla" "2.3.2"
+    "@uiw/react-color-editable-input-rgba" "2.3.2"
+    "@uiw/react-color-github" "2.3.2"
+    "@uiw/react-color-hue" "2.3.2"
+    "@uiw/react-color-saturation" "2.3.2"
+
+"@uiw/react-color-circle@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-circle/-/react-color-circle-2.3.2.tgz"
+  integrity sha512-lndeyFmvKNZ5MBwL9BqkfceuhOnIGQW3gB9wKRPxiKmux9maxllirTwWNvv/6vgGFMnfaR89NO7pjTyf7mNhOA==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-swatch" "2.3.2"
+
+"@uiw/react-color-colorful@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-colorful/-/react-color-colorful-2.3.2.tgz"
+  integrity sha512-Rr1qa4Uo588CZjOx6OZIXjo7+CNcnqogU0Nel6L5zzwL+3CNBC3GfS4Or4db/ZxFhN49qt6NqsQa/ykA2/ixpg==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-alpha" "2.3.2"
+    "@uiw/react-color-hue" "2.3.2"
+    "@uiw/react-color-saturation" "2.3.2"
+
+"@uiw/react-color-compact@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-compact/-/react-color-compact-2.3.2.tgz"
+  integrity sha512-3/eQkndGBIBr91mkPoOgS8NwTxpz5wEt5UK6CSvbC+zOQtEzZaWq+XpB7ieoUjla3yiKgdBauu3iYTwo1LOFEw==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-editable-input" "2.3.2"
+    "@uiw/react-color-editable-input-rgba" "2.3.2"
+    "@uiw/react-color-swatch" "2.3.2"
+
+"@uiw/react-color-editable-input-hsla@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-editable-input-hsla/-/react-color-editable-input-hsla-2.3.2.tgz"
+  integrity sha512-lLO8K+Zv5L9HKBgM3zYSqeLKisBkpXCxlQmF8iCKYcIgeRilM26qqylskA4n6pVixfSooL0hyL/HwfNmbCIrrg==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-editable-input-rgba" "2.3.2"
+
+"@uiw/react-color-editable-input-rgba@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-editable-input-rgba/-/react-color-editable-input-rgba-2.3.2.tgz"
+  integrity sha512-HV0+5zzpaNG5v6EyVgmPfInd9UzYknQI7gdsVmmXKzB13L3RFhiv77r6o+q3IZMEnoDZ3U92uX4FeRaM1NrwYw==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-editable-input" "2.3.2"
+
+"@uiw/react-color-editable-input@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-editable-input/-/react-color-editable-input-2.3.2.tgz"
+  integrity sha512-DDl9pCN7hH5Q+OB6LiFGFmkqIQw81EDIEvDi6rr6G9U+k+oqZ9JCBKSZ9qNKSa4MqnuISOkFv0vL3Jh8fSyqcg==
+
+"@uiw/react-color-github@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-github/-/react-color-github-2.3.2.tgz"
+  integrity sha512-3QxpEOKYXbbV/L1cYsf7nhoOnl19/zWTpRRgda8LOe3SuRhFrFM3ZLa+UJUEXgO1cg9h64gxSKINh2st/FawpQ==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-swatch" "2.3.2"
+
+"@uiw/react-color-hue@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-hue/-/react-color-hue-2.3.2.tgz"
+  integrity sha512-aAveo++GAghw09Ngc8Zzwxhj9mGaJfw8q40fDGFrVNxdrwrAjySIKHzlOSg5kw6WnEp4tUjhkMXDfCZWUhqmPA==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-alpha" "2.3.2"
+
+"@uiw/react-color-material@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-material/-/react-color-material-2.3.2.tgz"
+  integrity sha512-fb+bVCwRoeb4INAFEEYU26GWU7+/695DFz7C/dA2RLUa279NhVtNaOtISULT+u+Aerf2dR6GrjBk5wdgNqRqPg==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-editable-input" "2.3.2"
+    "@uiw/react-color-editable-input-rgba" "2.3.2"
+
+"@uiw/react-color-name@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-name/-/react-color-name-2.3.2.tgz"
+  integrity sha512-ZLt6ypbsGbo48wSgtFa5t+egZ57VmWIriyW/6rMNK5nMB8Y9Da7tqT2dL4WfwPzrG7I/97qafinfnGzPAuHdsw==
+  dependencies:
+    colors-named "^1.0.1"
+    colors-named-hex "^1.0.1"
+
+"@uiw/react-color-saturation@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-saturation/-/react-color-saturation-2.3.2.tgz"
+  integrity sha512-aDKMhjylBUb4dH4oTQYz+U4mhpOebbQ2J0Y8y5aX1tfZ3fZuBqnXtWzu7Ffj3ksdKwkQHPddxT5IDTbAChF/og==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-drag-event-interactive" "2.3.2"
+
+"@uiw/react-color-shade-slider@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-shade-slider/-/react-color-shade-slider-2.3.2.tgz"
+  integrity sha512-nM8AJPpq9UnC7LWjQEZ28bIm8gMRqRzk3dXfGQ4X3t3040d11o4sbl23pTmWTjn6P+3+MP/L2FhmvLSTUkMp/g==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-alpha" "2.3.2"
+
+"@uiw/react-color-sketch@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-sketch/-/react-color-sketch-2.3.2.tgz"
+  integrity sha512-CMCbzarRVEqZLCi84AE4RQrHapvZQTXFylm7A7mfA28qInFFyF3jZsqRu6Y5sc33rPmL4AeSURbgPljmolxQ1g==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-alpha" "2.3.2"
+    "@uiw/react-color-editable-input" "2.3.2"
+    "@uiw/react-color-editable-input-rgba" "2.3.2"
+    "@uiw/react-color-hue" "2.3.2"
+    "@uiw/react-color-saturation" "2.3.2"
+    "@uiw/react-color-swatch" "2.3.2"
+
+"@uiw/react-color-slider@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-slider/-/react-color-slider-2.3.2.tgz"
+  integrity sha512-Mf9w9YwI+nYxagoTPsxzEHX+/EkVTH0Ak84V6CgcmHVxM3zGESdpalZ+9B6NFWjy9nP7Oa2lK1i4cyZr8D7v2g==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-alpha" "2.3.2"
+
+"@uiw/react-color-swatch@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-swatch/-/react-color-swatch-2.3.2.tgz"
+  integrity sha512-AjkEcSdlpxiFm9yull4WDujuHr0tD9/+XkLtcus/MH768zSQbb+rj6cY1nZ8L8FI6LRDGRaVJqFaXm4ZOAaIZw==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+
+"@uiw/react-color-wheel@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color-wheel/-/react-color-wheel-2.3.2.tgz"
+  integrity sha512-AwZZusWq+nlNNEjif6ruryrgc/cVuQ0x6XbdIVUbiQekfHFv+LunHnMS4EtmX+yPiOVihTvBp8NpfrdN2jJ8hw==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-drag-event-interactive" "2.3.2"
+
+"@uiw/react-color@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-color/-/react-color-2.3.2.tgz"
+  integrity sha512-PfyzYFIa16MKVd2FLFmV/+moznibDCDZB6AUwV6lrL7Mz+/jjcW1JDDdCRWMHC8e7uoC3EmnYAmnpj2eF0w2vw==
+  dependencies:
+    "@uiw/color-convert" "2.3.2"
+    "@uiw/react-color-alpha" "2.3.2"
+    "@uiw/react-color-block" "2.3.2"
+    "@uiw/react-color-chrome" "2.3.2"
+    "@uiw/react-color-circle" "2.3.2"
+    "@uiw/react-color-colorful" "2.3.2"
+    "@uiw/react-color-compact" "2.3.2"
+    "@uiw/react-color-editable-input" "2.3.2"
+    "@uiw/react-color-editable-input-hsla" "2.3.2"
+    "@uiw/react-color-editable-input-rgba" "2.3.2"
+    "@uiw/react-color-github" "2.3.2"
+    "@uiw/react-color-hue" "2.3.2"
+    "@uiw/react-color-material" "2.3.2"
+    "@uiw/react-color-name" "2.3.2"
+    "@uiw/react-color-saturation" "2.3.2"
+    "@uiw/react-color-shade-slider" "2.3.2"
+    "@uiw/react-color-sketch" "2.3.2"
+    "@uiw/react-color-slider" "2.3.2"
+    "@uiw/react-color-swatch" "2.3.2"
+    "@uiw/react-color-wheel" "2.3.2"
+
+"@uiw/react-drag-event-interactive@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/@uiw/react-drag-event-interactive/-/react-drag-event-interactive-2.3.2.tgz"
+  integrity sha512-lG5pJCtqbYBv7Dj0r12PE9q9yg7P2CzlQodw5ZHPY9GCSZVXHJc0g4lGvCbe/4Y8HYqM8aU4CYS8LplpX+mIQw==
+
 "@ungap/structured-clone@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.2.0.tgz"
@@ -4468,6 +4669,16 @@ colorette@^1.0.7:
   version "1.4.0"
   resolved "https://registry.npmjs.org/colorette/-/colorette-1.4.0.tgz"
   integrity sha512-Y2oEozpomLn7Q3HFP7dpww7AtMJplbM9lGZP6RDfHqmbeRjiwRg4n6VM6j4KLmRke85uWEI7JqF17f3pqdRA0g==
+
+colors-named-hex@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/colors-named-hex/-/colors-named-hex-1.0.2.tgz"
+  integrity sha512-k6kq1e1pUCQvSVwIaGFq2l0LrkAPQZWyeuZn1Z8nOiYSEZiKoFj4qx690h2Kd34DFl9Me0gKS6MUwAMBJj8nuA==
+
+colors-named@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/colors-named/-/colors-named-1.0.2.tgz"
+  integrity sha512-2ANq2r393PV9njYUD66UdfBcxR1slMqRA3QRTWgCx49JoCJ+kOhyfbQYxKJbPZQIhZUcNjVOs5AlyY1WwXec3w==
 
 combined-stream@^1.0.6, combined-stream@^1.0.8:
   version "1.0.8"
@@ -8298,6 +8509,11 @@ react-async-script@^1.2.0:
     hoist-non-react-statics "^3.3.0"
     prop-types "^15.5.0"
 
+react-colorful@^5.6.1:
+  version "5.6.1"
+  resolved "https://registry.npmjs.org/react-colorful/-/react-colorful-5.6.1.tgz"
+  integrity sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==
+
 react-compare-slider@^3.0.1:
   version "3.1.0"
   resolved "https://registry.npmjs.org/react-compare-slider/-/react-compare-slider-3.1.0.tgz"
@@ -8367,7 +8583,7 @@ react-dnd@^16.0.1, "react-dnd@10.x || 11.x || 14.x || 15.x || 16.x":
     fast-deep-equal "^3.1.3"
     hoist-non-react-statics "^3.3.2"
 
-react-dom@*, "react-dom@^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom@^16 || ^17 || ^18", "react-dom@^16.7.0 || ^17 || ^18 || ^19", "react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8.5 || ^17.0.0 || ^18.0.0", "react-dom@^17.0.0 || ^18.0.0", react-dom@^18.0.0, react-dom@^18.2.0, "react-dom@>= 0.14.0", "react-dom@>= 16.12.0", "react-dom@>= 16.3.0", "react-dom@>= 16.8.0 || ^18.0.0", react-dom@>=0.14.0, react-dom@>=16.3.0, react-dom@>=16.6.0, react-dom@>=16.8, react-dom@>=16.8.0, react-dom@>=18.0, react-dom@>=18.0.0, "react-dom@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x || ^18.x.x", "react-dom@16.2.0 - 18", "react-dom@16.x || 17.x || 18.x":
+react-dom@*, "react-dom@^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react-dom@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom@^16 || ^17 || ^18", "react-dom@^16.7.0 || ^17 || ^18 || ^19", "react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^16.8.5 || ^17.0.0 || ^18.0.0", "react-dom@^17.0.0 || ^18.0.0", react-dom@^18.0.0, react-dom@^18.2.0, "react-dom@>= 0.14.0", "react-dom@>= 16.12.0", "react-dom@>= 16.3.0", "react-dom@>= 16.8.0 || ^18.0.0", react-dom@>=0.14.0, react-dom@>=16.3.0, react-dom@>=16.6.0, react-dom@>=16.8, react-dom@>=16.8.0, react-dom@>=16.9.0, react-dom@>=18.0, react-dom@>=18.0.0, "react-dom@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x || ^18.x.x", "react-dom@16.2.0 - 18", "react-dom@16.x || 17.x || 18.x":
   version "18.3.1"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz"
   integrity sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==
@@ -8698,7 +8914,7 @@ react-zoom-pan-pinch@^3.4.4:
   resolved "https://registry.npmjs.org/react-zoom-pan-pinch/-/react-zoom-pan-pinch-3.6.1.tgz"
   integrity sha512-SdPqdk7QDSV7u/WulkFOi+cnza8rEZ0XX4ZpeH7vx3UZEg7DoyuAy3MCmm+BWv/idPQL2Oe73VoC0EhfCN+sZQ==
 
-react@*, "react@^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^15.3.0 || 16 || 17 || 18", "react@^16 || ^17 || ^18", "react@^16.11.0 || ^17.0.0 || ^18.0.0", "react@^16.6.0 || 17 || 18", "react@^16.7.0 || ^17 || ^18 || ^19", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.3 || ^17.0.0-0 || ^18.0.0", "react@^16.8.5 || ^17.0.0 || ^18.0.0", "react@^17.0.0 || ^18.0.0", "react@^18 || ^19", react@^18.0.0, react@^18.2.0, react@^18.3.1, "react@>= 0.14.0", "react@>= 16.12.0", "react@>= 16.14", "react@>= 16.3.0", "react@>= 16.8 || 18.0.0", "react@>= 16.8.0", "react@>= 16.8.0 || ^18.0.0", react@>=0.13, react@>=0.14.0, react@>=16, react@>=16.3.0, react@>=16.4.1, react@>=16.6.0, react@>=16.8, react@>=16.8.0, react@>=17.0, react@>=18.0, react@>=18.0.0, "react@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x || ^18.x.x", "react@0.14 || 15 || 16 || 17 || 18", "react@16.2.0 - 18", "react@16.8.0  || >=17.0.0 || >=18.0.0", "react@16.x || 17.x || 18.x":
+react@*, "react@^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react@^15.3.0 || 16 || 17 || 18", "react@^16 || ^17 || ^18", "react@^16.11.0 || ^17.0.0 || ^18.0.0", "react@^16.6.0 || 17 || 18", "react@^16.7.0 || ^17 || ^18 || ^19", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.3 || ^17.0.0-0 || ^18.0.0", "react@^16.8.5 || ^17.0.0 || ^18.0.0", "react@^17.0.0 || ^18.0.0", "react@^18 || ^19", react@^18.0.0, react@^18.2.0, react@^18.3.1, "react@>= 0.14.0", "react@>= 16.12.0", "react@>= 16.14", "react@>= 16.3.0", "react@>= 16.8 || 18.0.0", "react@>= 16.8.0", "react@>= 16.8.0 || ^18.0.0", react@>=0.13, react@>=0.14.0, react@>=16, react@>=16.3.0, react@>=16.4.1, react@>=16.6.0, react@>=16.8, react@>=16.8.0, react@>=16.9.0, react@>=17.0, react@>=18.0, react@>=18.0.0, "react@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x || ^18.x.x", "react@0.14 || 15 || 16 || 17 || 18", "react@16.2.0 - 18", "react@16.8.0  || >=17.0.0 || >=18.0.0", "react@16.x || 17.x || 18.x":
   version "18.3.1"
   resolved "https://registry.npmjs.org/react/-/react-18.3.1.tgz"
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==

@@ -1,9 +1,17 @@
+//TODO: Add the modals : Search Telescope & Search Camera
+//TODO: Add the frame Rotation
+//TODO: Add more reducers and barlows in the dropdowns
+//TODO: Add labels below each green boxes
+
 import React from 'react';
 import {
   Box, Grid, Card, CardContent, Typography, Button, Tooltip, TextField, MenuItem,
   Dialog, DialogTitle, DialogContent, DialogActions, InputLabel, FormControl, Select,
   Chip} from '@mui/material';
 import MainCard from 'components/MainCard';
+
+import { Circle } from '@uiw/react-color'
+
 import Table from './Table';
 
 import { useState } from 'react';
@@ -39,7 +47,8 @@ export default function ImagingFramingSimulator() {
     const [BarlowReducer, setBarlowReducer] = useState('1')
     const [SearchTarget, setSearchTarget] = useState('')
     const [triggerUpdate, setTriggerUpdate] = useState(false);
-    const [ReducerBarlow, setReducerBarlow] = useState('')
+    const [ReducerBarlow, setReducerBarlow] = useState('') // Added a second Hook to be able to pass the final value onSubmitting as a prop
+    const [Color, setColor] = useState('#F44E3B')
 
     const [RA, setRA] = useState('')
     const [DEC, setDEC] = useState('')
@@ -65,7 +74,7 @@ export default function ImagingFramingSimulator() {
     };
 
     const handleBarlowReducer = (e) => {
-      setBarlowReducer(e.target.value)
+        setBarlowReducer(e.target.value)
     }
 
     const handleChangeSurvey = (e) => {
@@ -280,7 +289,7 @@ export default function ImagingFramingSimulator() {
 
                     {/* Aladin Result here */}
 
-                    <Aladin setDEC={setDEC} setRA={setRA} DEC={DEC} RA={RA} reducer={ReducerBarlow} Survey={Survey} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning} />
+                    <Aladin color={Color} setDEC={setDEC} setRA={setRA} DEC={DEC} RA={RA} reducer={ReducerBarlow} Survey={Survey} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning} />
                     <br />
                     <Button 
                       variant="shadow"
@@ -309,7 +318,25 @@ export default function ImagingFramingSimulator() {
                     <Typography variant="h5" color="primary.main" gutterBottom>
                         Frame Color
                     </Typography>
-                    <input type="color" id="frame_color_line" value="#abfb04" />
+                    <Circle
+                      colors={[
+                        '#f44336',
+                        '#e91e63',
+                        '#9c27b0',
+                        '#673ab7',
+                        '#3f51b5',
+                        '#2196f3',
+                      ]}
+                      color={Color}
+                      pointProps={{
+                        style: {
+                          marginRight: 20,
+                        },
+                      }}
+                      onChange={(color) => {
+                        setColor(color.hex);
+                      }}
+                    />
                 </CardContent>
             </Card>
         </Grid>
