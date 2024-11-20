@@ -1,3 +1,9 @@
+//TODO: Quand l'utilisateur pèse sur la boîte, la boite bouge où il veut qu'elle aille
+//TODO: La rotation de la boîte devrait se faire sur la dernière boîte sélectionnée
+//TODO: Un bouton qui clear toutes les boîtes existantes
+//TODO: les modals Search Telescope & Search Camera
+//TODO: Ajouter des labels en-dessous de chaque boîte
+
 import React, { useState, useEffect, useRef } from 'react';
 import A from 'aladin-lite';
 import { toPng } from "html-to-image";
@@ -185,7 +191,7 @@ const Aladin = ({
 
   return (
     <div>
-      <div id="aladin-lite-div" ref={aladinRef} style={{ width: '100%', height: '500px' }} />
+      <div id="aladin-lite-div" ref={aladinRef} style={{ width: '100%', height: '1000px' }} />
       <button onClick={takeScreenshot} style={{ display: "none" }} id="hidden-screenshot-button">
           Take Screenshot
       </button>

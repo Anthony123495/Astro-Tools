@@ -1,6 +1,3 @@
-//TODO: Add the modals : Search Telescope & Search Camera
-//TODO: Add labels below each green boxes
-
 import React from 'react';
 import {
   Box, Grid, Card, CardContent, Typography, Button, Tooltip, TextField, MenuItem,
@@ -346,6 +343,7 @@ export default function ImagingFramingSimulator() {
                                 max={360}
                                 direction={1}
                                 knobPosition="right"
+                                label='ANGLE of the selected frame'
                                 appendToValue="°"
                                 valueFontSize="4rem"
                                 trackColor="#eeeeee"
@@ -359,7 +357,7 @@ export default function ImagingFramingSimulator() {
                         </Grid>
                         <Grid item xs={6} direction="column">        
                             <Typography variant="h5" color="primary.main" gutterBottom>
-                              Frame Color
+                              Frame Color of the selected frame
                             </Typography>
                             <Circle
                               colors={[
