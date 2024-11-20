@@ -1,5 +1,4 @@
 //TODO: Add the modals : Search Telescope & Search Camera
-//TODO: Add the frame Rotation
 //TODO: Add labels below each green boxes
 
 import React from 'react';
