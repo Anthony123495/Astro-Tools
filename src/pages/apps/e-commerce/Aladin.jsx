@@ -19,12 +19,14 @@ const Aladin = ({
   setRA,
   setDEC,
   color,
+  rotation,
 }) => {
   const aladinRef = useRef(null);
   const aladinInstance = useRef(null); // Store the Aladin instance
   const overlayRef = useRef(null); // Graphic overlay for all boxes
 
   const [fovBoxes, setFovBoxes] = useState([]);
+
 
   useEffect(() => {
     // Initialize Aladin instance once
@@ -49,14 +51,14 @@ const Aladin = ({
 
     if (SearchTarget) {
       aladinInstance.current.gotoObject(SearchTarget);
+      DEC = setDEC(formatDEC(aladinInstance.current.getRaDec()[1]))
+      RA = setRA(formatRA(aladinInstance.current.getRaDec()[0]))
     }
   }, [SearchTarget, Survey]);
   
 
   useEffect(() => {
     if (triggerUpdate) {
-
-    console.log("triggerUpdate received:", triggerUpdate);
 
     // Calculate FOV dimensions based on input parameters
     const fovX = calculateFOV(focalLength, resolutionX, pixelSizeX, reducer);

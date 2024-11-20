@@ -15,6 +15,7 @@
     "@fontsource/poppins": "^5.0.13",
     "@fontsource/public-sans": "^5.0.17",
     "@fontsource/roboto": "^5.0.12",
+    "@fseehawer/react-circular-slider": "^2.7.0",
     "@fullcalendar/common": "^5.11.5",
     "@fullcalendar/core": "^6.1.11",
     "@fullcalendar/daygrid": "^6.1.11",

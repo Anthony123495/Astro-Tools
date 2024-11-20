@@ -6,11 +6,11 @@ import React from 'react';
 import {
   Box, Grid, Card, CardContent, Typography, Button, Tooltip, TextField, MenuItem,
   Dialog, DialogTitle, DialogContent, DialogActions, InputLabel, FormControl, Select,
-  Chip} from '@mui/material';
+  Chip, IconButton} from '@mui/material';
 import MainCard from 'components/MainCard';
-
+import CircularSlider from '@fseehawer/react-circular-slider';
 import { Circle } from '@uiw/react-color'
-
+import {ArrowRotateLeft} from 'iconsax-react'
 import Table from './Table';
 
 import { useState } from 'react';
@@ -48,6 +48,8 @@ export default function ImagingFramingSimulator() {
     const [triggerUpdate, setTriggerUpdate] = useState(false);
     const [ReducerBarlow, setReducerBarlow] = useState('') // Added a second Hook to be able to pass the final value onSubmitting as a prop
     const [Color, setColor] = useState('#F44E3B')
+
+    const [Rotation, setRotation] = useState(0)
 
     const [RA, setRA] = useState('')
     const [DEC, setDEC] = useState('')
@@ -311,7 +313,7 @@ export default function ImagingFramingSimulator() {
 
                     {/* Aladin Result here */}
 
-                    <Aladin color={Color} setDEC={setDEC} setRA={setRA} DEC={DEC} RA={RA} reducer={ReducerBarlow} Survey={Survey} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning} />
+                    <Aladin rotation={Rotation} color={Color} setDEC={setDEC} setRA={setRA} DEC={DEC} RA={RA} reducer={ReducerBarlow} Survey={Survey} pixelSizeX={PixelSizeX} pixelSizeY={PixelSizeY} triggerUpdate={triggerUpdate} SearchTarget={SearchTarget} aperture={Aperture} focalLength={FocalLength} resolutionX={ResolutionX} resolutionY={ResolutionY} binning={Binning} />
                     <br />
                     <Button 
                       variant="shadow"
@@ -330,35 +332,57 @@ export default function ImagingFramingSimulator() {
         <Grid item xs={12} md={6}>
             <Card variant="outlined">
                 <CardContent>
-                    <Typography variant="h5" color="primary.main" gutterBottom>
-                        Frame Rotation
-                    </Typography>
-                    <Chip id="frame_rotation_reset">
-                        Reset
-                    </Chip>
-                    <input type="range" id="frame_rotation" step="1" min="-180" max="180" value="0" />
-                    <Typography variant="h5" color="primary.main" gutterBottom>
-                        Frame Color
-                    </Typography>
-                    <Circle
-                      colors={[
-                        '#f44336',
-                        '#e91e63',
-                        '#9c27b0',
-                        '#673ab7',
-                        '#3f51b5',
-                        '#2196f3',
-                      ]}
-                      color={Color}
-                      pointProps={{
-                        style: {
-                          marginRight: 20,
-                        },
-                      }}
-                      onChange={(color) => {
-                        setColor(color.hex);
-                      }}
-                    />
+                  <Grid container spacing='1'>
+                      <Grid item xs={6} direction="column">
+                          <Typography variant="h5" color="primary.main" gutterBottom>
+                              Frame Rotation
+                              <Tooltip title="Reset the Rotation">
+                                <IconButton onClick={() => setRotation(0)} aria-label="Reset the Rotation" size="large">
+                                  <ArrowRotateLeft variant="Bold" />
+                                </IconButton>
+                              </Tooltip>
+                          </Typography>
+                          <CircularSlider
+                                min={0}
+                                max={360}
+                                direction={1}
+                                knobPosition="right"
+                                appendToValue="°"
+                                valueFontSize="4rem"
+                                trackColor="#eeeeee"
+                                progressColorFrom={Color}
+                                progressColorTo={Color}
+                                labelColor={Color}
+                                knobColor= {Color}
+                                value={Rotation}
+                                onChange={(value) => setRotation(value)}
+                            />   
+                        </Grid>
+                        <Grid item xs={6} direction="column">        
+                            <Typography variant="h5" color="primary.main" gutterBottom>
+                              Frame Color
+                            </Typography>
+                            <Circle
+                              colors={[
+                            '#f44336',
+                            '#e91e63',
+                            '#9c27b0',
+                            '#673ab7',
+                            '#3f51b5',
+                            '#2196f3',
+                          ]}
+                          color={Color}
+                          pointProps={{
+                            style: {
+                              marginRight: 20,
+                            },
+                          }}
+                          onChange={(color) => {
+                            setColor(color.hex);
+                              }}
+                            />
+                        </Grid>
+                    </Grid>
                 </CardContent>
             </Card>
         </Grid>
