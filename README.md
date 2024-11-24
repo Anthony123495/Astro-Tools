@@ -43,7 +43,7 @@ This section list major frameworks/libraries used to bootstrap our project.
 
 - [React](https://reactjs.org)
 - [JQuery](https://jquery.com)
-- [Emotion](https://emotionjs.com)
+- [Emotion](https://emotion.sh)
 ## License
 
 Distributed under the MIT License. See [MIT License](https://opensource.org/licenses/MIT) for more information.
