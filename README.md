@@ -1,9 +1,7 @@
 
 <br/>
 <div align="center">
-<a href="https://github.com/ShaanCoding/ReadME-Generator">
-<img src="https://i.imghippo.com/files/vCp2566cc.png" alt="Logo" width="80" height="80">
-</a>
+<img src="https://i.imghippo.com/files/vCp2566cc.png" alt="Logo">
 <h3 align="center">David Astro Tools</h3>
 <p align="center">
 A free and user-friendly platform offering a variety of dynamic and responsive tools for Astronomy and Astrophotography enthusiasts. Perfect for planning and exploring the night sky with no cost involved! 🚀✨
