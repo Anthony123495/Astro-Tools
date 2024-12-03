@@ -1,0 +1,56 @@
+.aladin-container {
+    position: relative;
+    width: 100%;
+    height: 1000px;
+  }
+  
+  .box-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+  }
+  
+  .control-button {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  
+  .control-button:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+  }
+  
+  .box-list {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 1000;
+  }
+  
+  .aladin-box {
+    padding: 8px;
+    margin: 4px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .aladin-box.selected {
+    border-color: #646cff;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 8px rgba(100, 108, 255, 0.4);
+  }
+  
+  .box-label {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+  }
